@@ -112,5 +112,14 @@ public class CardController {
         // Перенаправляем пользователя на главную страницу или куда-либо еще
         return "redirect:/";
     }
+    @GetMapping("/cards")
+    public String getAllCards(Model model) {
+        // Получаем список всех карточек из базы данных
+        List<Card> cards = cardService.getAllCards();
+        // Добавляем список карточек в модель
+        model.addAttribute("cards", cards);
+        // Возвращаем имя представления
+        return "cards";
+    }
 }
 

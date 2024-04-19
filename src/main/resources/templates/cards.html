@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список карточек</title>
+    <style>
+        /* Стилизация заголовков таблицы */
+        table {
+            font-family: Arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Альтернативная заливка строк */
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* При наведении курсора на строку таблицы */
+        tr:hover {
+            background-color: #dddddd;
+        }
+
+    </style>
+</head>
+<body>
+<h1>Список всех карточек</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Номер карточки</th>
+        <th>Дата истечения</th>
+        <th>CVV-код</th>
+        <th>Баланс</th>
+        <th>Имя клиента</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Используем Thymeleaf для отображения списка карточек -->
+    <tr th:each="card : ${cards}">
+        <td th:text="${card.cardNumber}"></td>
+        <td th:text="${card.expirationDate}"></td>
+        <td th:text="${card.cvv}"></td>
+        <td th:text="${card.balance}"></td>
+        <td th:text="${card.client.name}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class CardService {
@@ -16,5 +18,10 @@ public class CardService {
         return cardRepository.save(card);
     }
 
-    // Другие методы для управления карточками
+    public List<Card> getAllCards() {
+      return   cardRepository.findAll();
+    }
+
+
+
 }
