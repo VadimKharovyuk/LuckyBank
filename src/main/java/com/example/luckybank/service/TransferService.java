@@ -17,7 +17,6 @@ public class TransferService {
         Card senderCard = cardService.getCardByNumber(senderCardNumber);
         Card recipientCard = cardService.getCardByNumber(recipientCardNumber);
 
-
         // Проверяем, достаточно ли средств у отправителя
         if (senderCard.getBalance() >= amount) {
             // Вычитаем сумму перевода со счета отправителя
