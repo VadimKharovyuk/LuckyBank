@@ -3,8 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <title>Успешный перевод</title>
+    <style>
+        /* Стили для навигационного меню */
+        nav {
+            background-color: #0a0a0a;
+            padding: 10px;
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        a {
+            color: #eae5e5;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Стили для содержимого страницы */
+        body {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: #0a0a0a;
+        }
+
+        p {
+            color: #333;
+        }
+
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #45a049;
+        }
+    </style>
 </head>
 <body>
+<nav>
+    <ul>
+        <li><a href="/">Главная страница</a></li>
+        <li><a href="/cards">Список всех карточек</a></li>
+        <li><a href="/sendmoney">Перевод денег</a></li>
+        <li><a href="/clients">Баланс Клиентов </a></li>
+        <li><a href="/total-balance">Общий баланс Lucky Bank </a></li>
+    </ul>
+</nav>
 <h1>Перевод успешно выполнен</h1>
 <p>Деньги успешно переведены на указанную карту.</p>
 <a href="/">На главную</a>

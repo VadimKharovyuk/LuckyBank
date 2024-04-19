@@ -3,8 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <title>Регистрация клиента</title>
+    <style>
+        /* Стили для навигационного меню */
+        nav {
+            background-color: #0a0a0a;
+            padding: 10px;
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        a {
+            color: #f3eaea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Стили для содержимого страницы */
+        body {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: #0a0a0a;
+        }
+
+        form {
+            margin-top: 20px;
+            text-align: left;
+            display: inline-block;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: 300px;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Кнопка для перехода на главную страницу */
+        a.back-link {
+            display: block;
+            margin-top: 20px;
+            color: #4CAF50;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        a.back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
+<nav>
+    <ul>
+        <li><a href="/">Главная страница</a></li>
+        <li><a href="/cards">Список всех карточек</a></li>
+        <li><a href="/sendmoney">Перевод денег</a></li>
+        <li><a href="/clients">Баланс Клиентов </a></li>
+        <li><a href="/total-balance">Общий баланс Lucky Bank </a></li>
+    </ul>
+</nav>
 <body>
+
 <h1>Регистрация нового клиента</h1>
 <form action="/register" method="post">
     <label for="name">Имя:</label>
@@ -23,7 +115,7 @@
 </form>
 
 <!-- Кнопка для перехода на главную страницу -->
-<a href="/">На главную страницу</a>
-<a href="/cards/create">Оформить карту банка </a>
+<a href="/" class="back-link">На главную страницу</a>
+<a href="/cards/create" class="back-link">Оформить карту банка</a>
 </body>
 </html>

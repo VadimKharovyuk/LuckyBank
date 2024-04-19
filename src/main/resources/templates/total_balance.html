@@ -3,11 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Total Balance</title>
+    <style>
+        nav {
+            background-color: #0a0a0a;
+            padding: 10px;
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        a {
+            color: #eae5e5;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .total{
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-<h1>Total Balance</h1>
-<a href="/">На главную</a>
-<p>The total balance is: <span th:text="${totalBalance}"></span></p>
+<nav>
+    <ul>
+        <li><a href="/">Главная страница</a></li>
+        <li><a href="/cards">Список всех карточек</a></li>
+        <li><a href="/sendmoney">Перевод денег</a></li>
+        <li><a href="/clients">Баланс Клиентов </a></li>
+        <li><a href="/total-balance">Общий баланс Lucky Bank </a></li>
+    </ul>
+</nav>
+<h1 style="color: #0a0a0a"  class="total">Total Balance</h1>
+<h1 style="text-align: center" >The total balance is: <span th:text="${totalBalance}"></span>$ </h1>
+
 
 </body>
 </html>
