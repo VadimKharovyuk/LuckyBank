@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание карточки</title>
+</head>
+<body>
+<h1>Создание новой карточки</h1>
+<form action="/cards/createcard" method="post">
+    <label for="cardNumber">Номер карточки:</label>
+    <input type="text" id="cardNumber" name="cardNumber" required><br><br>
+
+    <label for="expirationDate">Дата истечения:</label>
+    <input type="date" id="expirationDate" name="expirationDate" required><br><br>
+
+    <label for="cvv">CVV-код:</label>
+    <input type="text" id="cvv" name="cvv" required><br><br>
+
+    <label for="balance">Баланс:</label>
+    <input type="number" id="balance" name="balance" required><br><br>
+    <label for="clientName">Имя клиента:</label>
+    <select id="clientName" name="clientName" required>
+        <option value="">Выберите клиента</option>
+        <!-- Используем Thymeleaf для отображения списка клиентов -->
+        <option th:each="client : ${clients}" th:value="${client.name}" th:text="${client.name}"></option>
+    </select><br><br>
+
+    <input type="submit" value="Создать">
+</form>
+</body>
+</html>
