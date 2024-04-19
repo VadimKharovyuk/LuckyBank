@@ -1,7 +1,6 @@
 package com.example.luckybank.model;
 
-import com.example.luckybank.model.Client;
-import com.example.luckybank.service.CardNotFoundException;
+import com.example.luckybank.Exception.CardNotFoundException;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

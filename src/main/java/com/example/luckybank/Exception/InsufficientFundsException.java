@@ -1,4 +1,4 @@
-package com.example.luckybank.service;
+package com.example.luckybank.Exception;
 
 public class InsufficientFundsException extends RuntimeException {
 

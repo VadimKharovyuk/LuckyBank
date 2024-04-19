@@ -1,11 +1,10 @@
 package com.example.luckybank.controller;//package com.example.luckybank.controller;
 import com.example.luckybank.model.Card;
 import com.example.luckybank.model.Client;
-import com.example.luckybank.service.CardNotFoundException;
+import com.example.luckybank.Exception.CardNotFoundException;
 import com.example.luckybank.service.CardService;
 import com.example.luckybank.service.ClientService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
