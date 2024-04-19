@@ -1,6 +1,7 @@
 package com.example.luckybank.model;
 
 import com.example.luckybank.model.Client;
+import com.example.luckybank.service.CardNotFoundException;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,4 +27,9 @@ public class Card {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
+
+    public Card orElseThrow(Object o) {
+        throw new CardNotFoundException("Карта не найдена");
+    }
+
 }

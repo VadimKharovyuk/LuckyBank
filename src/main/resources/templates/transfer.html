@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Перевод средств</title>
+</head>
+<body>
+<h1>Перевод средств</h1>
+<form action="/transfer" method="post">
+    <label for="senderCardNumber">Номер карты отправителя:</label>
+    <input type="text" id="senderCardNumber" name="senderCardNumber" required><br><br>
+
+    <label for="recipientCardNumber">Номер карты получателя:</label>
+    <input type="text" id="recipientCardNumber" name="recipientCardNumber" required><br><br>
+
+    <label for="amount">Сумма перевода:</label>
+    <input type="number" id="amount" name="amount" required><br><br>
+
+    <input type="submit" value="Перевести">
+</form>
+</body>
+</html>

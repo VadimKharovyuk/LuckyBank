@@ -1,63 +1,7 @@
 package com.example.luckybank.controller;//package com.example.luckybank.controller;
-//
-//import com.example.luckybank.model.Card;
-//import com.example.luckybank.model.Client;
-//import com.example.luckybank.service.CardService;
-//import com.example.luckybank.service.ClientService;
-//import lombok.AllArgsConstructor;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.Model;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RequestParam;
-//
-//import java.util.Date;
-//import java.util.List;
-//
-//@Controller
-//@RequestMapping("/cards")
-//@AllArgsConstructor
-//public class CardController {
-//
-//    private final CardService cardService;
-//    private final ClientService clientService;
-//
-//    @GetMapping("/create")
-//    public String showCreateCardForm(Model model) {
-//        // Показать форму для создания карточки
-//        List<Client> clients = clientService.getAllClients(); // Получаем всех клиентов из базы данных
-//        model.addAttribute("clients", clients); // Добавляем список клиентов в модель
-//        return "create_card";
-//    }
-//
-//    @PostMapping("/createcard")
-//    public String createCard(@RequestParam String cardNumber,
-//                             @RequestParam Date expirationDate,
-//                             @RequestParam String cvv,
-//                             @RequestParam double balance,
-//                             @RequestParam String clientName) {
-//        // Создать новую карточку и связать ее с клиентом
-//        Card card = new Card();
-//        card.setCardNumber(cardNumber);
-//        card.setExpirationDate((java.sql.Date) expirationDate);
-//        card.setCvv(cvv);
-//        card.setBalance(balance);
-//
-//        // Получить клиента по имени и связать с карточкой
-//        Client client = clientService.getClientByName(clientName);
-//        card.setClient(client);
-//
-//        // Сохранить карточку
-//        cardService.createCard(card);
-//
-//        return "redirect:/";
-//    }
-//
-//}
-
 import com.example.luckybank.model.Card;
 import com.example.luckybank.model.Client;
+import com.example.luckybank.service.CardNotFoundException;
 import com.example.luckybank.service.CardService;
 import com.example.luckybank.service.ClientService;
 import lombok.AllArgsConstructor;
@@ -110,22 +54,31 @@ public class CardController {
         // Перенаправляем пользователя на главную страницу или куда-либо еще
         return "redirect:/";
     }
+
     @GetMapping("/cards")
     public String getAllCards(Model model) {
-        // Получаем список всех карточек из базы данных
-        List<Card> cards = cardService.getAllCards();
-        // Добавляем список карточек в модель
-        model.addAttribute("cards", cards);
-        // Возвращаем имя представления
-        return "cards";
+        try {
+            // Получаем список всех карточек из базы данных
+            List<Card> cards = cardService.getAllCards();
+            // Добавляем список карточек в модель
+            model.addAttribute("cards", cards);
+            // Возвращаем имя представления
+            return "cards";
+        } catch (CardNotFoundException e) {
+            // Обработка исключения, если список карт пуст
+            // В данном случае можно вернуть страницу с сообщением об ошибке или перенаправить на другую страницу
+            return "errorPage"; // Замените "errorPage" на имя вашего шаблона страницы с ошибкой
+        }
     }
 
-    @PostMapping("/cards/delete/{id}")
-    public String deleteCard(@PathVariable Long id) {
-        // Удаляем карту по её ID
-        cardService.deleteCardById(id);
-        // Перенаправляем пользователя на страницу со списком карточек или куда-либо еще
-        return "redirect:/cards";
-    }
+
+
+@PostMapping("/cards/delete/{id}")
+public String deleteCard(@PathVariable Long id) {
+    // Удаляем карту по её ID
+    cardService.deleteCardById(id);
+    // Перенаправляем пользователя на страницу со списком карточек или куда-либо еще
+    return "redirect:/cards";
+}
 }
 
