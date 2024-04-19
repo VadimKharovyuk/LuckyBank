@@ -30,12 +30,45 @@
         tr:hover {
             background-color: #dddddd;
         }
+        nav {
+            background-color: #0a0a0a;
+            padding: 10px;
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
 
     </style>
 </head>
+<nav>
+    <ul>
+        <li><a href="/">Главная страница</a></li>
+        <li><a href="/register">Зарегистрироваться</a></li>
+        <li><a href="/cards/create">Создать новую карту</a></li>
+        <li><a href="/cards">Лист карт</a></li>
+        <li><a href="/sendmoney">Перевод денег</a></li>
+        <li><a href="/total-balance">Общий баланс</a></li>
+        <li><a href="/clients">Клиенты Банка </a></li>
+    </ul>
+</nav>
 <body>
-<h1>Список всех карточек</h1>
+<h1 style="text-align: center">Список всех карточек</h1>
 <a href="/total-balance">total-balance</a><br><br>
 <table>
     <thead>
