@@ -3,14 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>Lucky Bank</title>
+    <style>
+        /* Стили для хедера */
+        header {
+            background-color: #4CAF50;
+            padding: 10px;
+            text-align: center;
+            color: white;
+        }
+
+        /* Стили для блока услуг */
+        .services {
+            margin-top: 50px;
+            text-align: center;
+        }
+        .services a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-<h1>Добро пожаловать в Lucky Bank!</h1>
-<p>Для пользования Lucky Bank зарегистрируйтесь:</p>
-<a href="/register">Зарегистрироваться</a><br><br>
-<a href="/cards/create">Создать новую карту</a><br><br>
-<a href="/cards">Лист карт</a><br><br>
-<a href="/sendmoney">sendmoney</a><br><br>
-<a href="/total-balance">total-balance</a><br><br>
+<header>
+    <h1>Добро пожаловать в Lucky Bank!</h1>
+</header>
+<nav>
+    <p>Навигация:</p>
+    <a href="/register">Зарегистрироваться</a><br><br>
+    <a href="/cards/create">Создать новую карту</a><br><br>
+    <a href="/cards">Лист карт</a><br><br>
+    <a href="/sendmoney">Перевод денег</a><br><br>
+    <a href="/total-balance">Общий баланс</a><br><br>
+</nav>
+<div class="services">
+    <h2>Услуги Lucky Bank:</h2>
+    <a href="/sendmoney">Перевод денег</a><br><br>
+    <a href="/register">Регистрация</a><br><br>
+    <a href="/cards/create">Создать новую карту</a><br><br>
+</div>
 </body>
 </html>
