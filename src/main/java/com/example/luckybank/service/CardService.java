@@ -67,6 +67,10 @@ public class CardService {
         cardRepository.save(senderCard);
     }
 
+    public List<Card> getCardsByClientId(Long id) {
+        return cardRepository.findByClientId(id);
+    }
+
 
 }
 

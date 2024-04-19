@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список клиентов</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<h1>Список клиентов</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Email</th>
+        <th>Баланс первой карты</th>
+    </tr>
+    <!-- Итерация по списку клиентов для заполнения таблицы -->
+    <th:block th:each="client : ${clients}">
+        <tr>
+            <td th:text="${client.id}"></td>
+            <td th:text="${client.name}"></td>
+            <td th:text="${client.lastName}"></td>
+            <td th:text="${client.email}"></td>
+            <!-- Дополнительные поля по вашему выбору -->
+            <td>
+                <span th:if="${client.cards != null and client.cards.size() > 0}" th:text="${client.cards[0].balance}"></span>
+            </td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>

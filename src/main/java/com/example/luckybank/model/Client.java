@@ -23,6 +23,8 @@ public class Client {
     private String lastName;
     private String address;
     private String email;
+    private String balance ;
+
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Card> cards;
