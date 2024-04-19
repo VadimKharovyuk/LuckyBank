@@ -64,9 +64,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.sql.Date;
@@ -120,6 +118,14 @@ public class CardController {
         model.addAttribute("cards", cards);
         // Возвращаем имя представления
         return "cards";
+    }
+
+    @PostMapping("/cards/delete/{id}")
+    public String deleteCard(@PathVariable Long id) {
+        // Удаляем карту по её ID
+        cardService.deleteCardById(id);
+        // Перенаправляем пользователя на страницу со списком карточек или куда-либо еще
+        return "redirect:/cards";
     }
 }
 

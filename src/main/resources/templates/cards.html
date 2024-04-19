@@ -44,6 +44,7 @@
         <th>CVV-код</th>
         <th>Баланс</th>
         <th>Имя клиента</th>
+        <th>Удалить карту</th>
     </tr>
     </thead>
     <tbody>
@@ -54,8 +55,16 @@
         <td th:text="${card.cvv}"></td>
         <td th:text="${card.balance}"></td>
         <td th:text="${card.client.name}"></td>
+        <td>
+            <form th:action="@{/cards/delete/{id}(id=${card.id})}" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <input type="submit" value="Удалить">
+            </form>
+
+        </td>
     </tr>
     </tbody>
 </table>
 </body>
 </html>
+

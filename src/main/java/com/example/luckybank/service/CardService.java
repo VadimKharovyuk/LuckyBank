@@ -23,5 +23,7 @@ public class CardService {
     }
 
 
-
+    public void deleteCardById(Long id) {
+        cardRepository.deleteById(id);
+    }
 }
