@@ -4,6 +4,7 @@ import com.example.luckybank.model.Client;
 import com.example.luckybank.Exception.CardNotFoundException;
 import com.example.luckybank.service.CardService;
 import com.example.luckybank.service.ClientService;
+import com.example.luckybank.service.EmailService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +17,7 @@ import java.util.List;
 @Controller
 @AllArgsConstructor
 public class CardController {
-
-
     private final CardService cardService;
-
-
     private final ClientService clientService;
 
     @GetMapping("/cards/create")

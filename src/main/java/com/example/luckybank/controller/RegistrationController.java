@@ -2,6 +2,7 @@ package com.example.luckybank.controller;
 
 import com.example.luckybank.model.Client;
 import com.example.luckybank.service.ClientService;
+import com.example.luckybank.service.EmailService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class RegistrationController {
 
     private final ClientService clientService;
+    private final EmailService emailService;
 
     @GetMapping
     public String showRegistrationForm() {
@@ -36,6 +38,9 @@ public class RegistrationController {
 
         // Сохраняем клиента в банке
         clientService.createClient(newClient);
+
+        // Отправляем сообщение на почту о успешной регистрации
+        emailService.sendRegistrationConfirmationEmail(email, newClient);
 
         // Перенаправляем пользователя на другую страницу после успешной регистрации
         return "redirect:/";
