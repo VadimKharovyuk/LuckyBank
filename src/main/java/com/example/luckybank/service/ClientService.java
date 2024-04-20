@@ -4,6 +4,7 @@ import com.example.luckybank.model.Card;
 import com.example.luckybank.model.Client;
 import com.example.luckybank.repositoty.CardRepository;
 import com.example.luckybank.repositoty.ClientRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +21,10 @@ public class ClientService {
         return clientRepository.save(client);
     }
 
-    public Client getClientById(Long id) {
-        // Добавьте здесь логику для получения клиента по идентификатору
-        return clientRepository.findById(id).orElse(null);
-    }
+//    public Client getClientById(Long id) {
+//        // Добавьте здесь логику для получения клиента по идентификатору
+//        return clientRepository.findById(id).orElse(null);
+//    }
 
     public Client getClientByName(String name) {
         return clientRepository.findByName(name);
@@ -37,4 +38,21 @@ public class ClientService {
     public List<Card> getCardsByClientId(Long id) {
         return cardRepository.findByClientId(id);
     }
+    public Client getClientById(Long id) {
+        // Ваша логика для получения клиента по идентификатору
+        return (Client) clientRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Клиент с id " + id + " не найден"));
+    }
+
+    public void updateClient(Client client) {
+        // Проверяем, что клиент существует в базе данных
+        if (client.getId() == null || !clientRepository.existsById(client.getId())) {
+            throw new EntityNotFoundException("Клиент не найден");
+        }
+
+        // Выполняем обновление данных клиента в базе данных
+        clientRepository.save(client);
+    }
+
 }
+

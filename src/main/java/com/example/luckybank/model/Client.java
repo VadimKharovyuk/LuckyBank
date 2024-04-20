@@ -29,5 +29,12 @@ public class Client {
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Card> cards;
 
-
+    @ManyToMany
+    @JoinTable(name = "client_food",
+            joinColumns = @JoinColumn(name = "client_id"),
+            inverseJoinColumns = @JoinColumn(name = "food_id"))
+    private List<Food> foods;
 }
+
+
+
