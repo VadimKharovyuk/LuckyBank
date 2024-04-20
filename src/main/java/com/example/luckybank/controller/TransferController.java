@@ -11,13 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @AllArgsConstructor
 public class TransferController {
-    private  final  TransferService transferService;
+    private final TransferService transferService;
 
     @GetMapping("/sendmoney")
-    public String sendModey(){
+    public String sendModey() {
         return "transfer";
     }
-
 
 
     @PostMapping("/transfer")
@@ -31,7 +30,7 @@ public class TransferController {
     }
 
     @GetMapping("/confirmation")
-    public String confirmation (){
+    public String confirmation() {
         return "confirmation";
     }
 }

@@ -12,9 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class EmailService {
-
     private final JavaMailSender javaMailSender;
-
 
     public void sendRegistrationConfirmationEmail(String recipientEmail, Client newClient) {
         if (javaMailSender == null || recipientEmail == null || newClient == null) {

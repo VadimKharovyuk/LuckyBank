@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class TransferService {
 
 
-    private  final CardService cardService;
+    private final CardService cardService;
 
     public void transfer(String senderCardNumber, String recipientCardNumber, double amount) throws Throwable {
         // Получаем информацию о картах отправителя и получателя

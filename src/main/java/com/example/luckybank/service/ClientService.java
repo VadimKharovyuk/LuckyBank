@@ -1,4 +1,5 @@
 package com.example.luckybank.service;
+
 import com.example.luckybank.model.Card;
 import com.example.luckybank.model.Client;
 import com.example.luckybank.repositoty.CardRepository;
@@ -12,7 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 public class ClientService {
     private final ClientRepository clientRepository;
-    private final  CardRepository cardRepository;
+    private final CardRepository cardRepository;
+
     public Client createClient(Client client) {
         // Добавьте здесь логику для создания клиента
         return clientRepository.save(client);
@@ -28,7 +30,7 @@ public class ClientService {
     }
 
     public List<Client> getAllClients() {
-       return clientRepository.findAll();
+        return clientRepository.findAll();
     }
 
 

@@ -16,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ClientController {
     private final ClientService clientService;
+
     @GetMapping("/clients")
     public String clientsAll(Model model) {
         List<Client> clients = clientService.getAllClients();
@@ -28,5 +29,5 @@ public class ClientController {
 
         return "clients";
 
-}
+    }
 }

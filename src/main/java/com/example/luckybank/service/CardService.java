@@ -6,6 +6,7 @@ import com.example.luckybank.model.Card;
 import com.example.luckybank.repositoty.CardRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -53,7 +54,6 @@ public class CardService {
         // Если список не пустой, возвращаем первую карту из списка
         return cards.get(0);
     }
-
 
 
     // Метод для проверки баланса и списания средств с карты отправителя

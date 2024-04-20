@@ -1,4 +1,5 @@
 package com.example.luckybank.controller;//package com.example.luckybank.controller;
+
 import com.example.luckybank.model.Card;
 import com.example.luckybank.model.Client;
 import com.example.luckybank.Exception.CardNotFoundException;
@@ -68,13 +69,12 @@ public class CardController {
     }
 
 
-
-@PostMapping("/cards/delete/{id}")
-public String deleteCard(@PathVariable Long id) {
-    // Удаляем карту по её ID
-    cardService.deleteCardById(id);
-    // Перенаправляем пользователя на страницу со списком карточек или куда-либо еще
-    return "redirect:/cards";
-}
+    @PostMapping("/cards/delete/{id}")
+    public String deleteCard(@PathVariable Long id) {
+        // Удаляем карту по её ID
+        cardService.deleteCardById(id);
+        // Перенаправляем пользователя на страницу со списком карточек или куда-либо еще
+        return "redirect:/cards";
+    }
 }
 
