@@ -1,41 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Магазин продуктов</title>
-</head>
-<body>
-<h1>Магазин продуктов</h1>
-<form action="/buy" method="post">
-    <label for="client">Выберите клиента:</label>
-    <select name="clientId" id="client">
-        <!-- Iterate over clients and populate options -->
-        <option th:each="client : ${clientList}" th:value="${client.id}" th:text="${client.name}"></option>
-    </select>
-    <table>
-        <thead>
-        <tr>
-            <th>Название</th>
-            <th>Описание</th>
-            <th>Цена</th>
-            <th>Действие</th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- Здесь будет отображаться список продуктов -->
-        <!-- Используйте Thymeleaf для отображения данных из модели -->
-        <tr th:each="food : ${foodList}">
-            <td th:text="${food.name}"></td>
-            <td th:text="${food.description}"></td>
-            <td th:text="${food.price}"></td>
-            <td>
-                <input type="hidden" name="foodId" th:value="${food.id}">
-                <button type="submit">Купить</button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</form>
-</body>
-</html>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Магазин продуктов</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Магазин продуктов</h1>-->
+<!--<form action="/buy" method="post">-->
+<!--    <label for="client">Выберите клиента:</label>-->
+<!--    <select name="clientId" id="client">-->
+<!--        &lt;!&ndash; Iterate over clients and populate options &ndash;&gt;-->
+<!--        <option th:each="client : ${clientList}" th:value="${client.id}" th:text="${client.name}"></option>-->
+<!--    </select>-->
+<!--    <table>-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>Название</th>-->
+<!--            <th>Описание</th>-->
+<!--            <th>Цена</th>-->
+<!--            <th>Действие</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        &lt;!&ndash; Здесь будет отображаться список продуктов &ndash;&gt;-->
+<!--        &lt;!&ndash; Используйте Thymeleaf для отображения данных из модели &ndash;&gt;-->
+<!--        <tr th:each="food : ${foodList}">-->
+<!--            <td th:text="${food.name}"></td>-->
+<!--            <td th:text="${food.description}"></td>-->
+<!--            <td th:text="${food.price}"></td>-->
+<!--            <td>-->
+<!--                <input type="hidden" name="foodId" th:value="${food.id}">-->
+<!--                <button type="submit">Купить</button>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
+
+

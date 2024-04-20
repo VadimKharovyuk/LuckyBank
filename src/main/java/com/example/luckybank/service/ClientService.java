@@ -44,15 +44,27 @@ public class ClientService {
                 .orElseThrow(() -> new EntityNotFoundException("Клиент с id " + id + " не найден"));
     }
 
-    public void updateClient(Client client) {
-        // Проверяем, что клиент существует в базе данных
-        if (client.getId() == null || !clientRepository.existsById(client.getId())) {
-            throw new EntityNotFoundException("Клиент не найден");
-        }
+//    public void updateClient(Client client) {
+//        // Проверяем, что клиент существует в базе данных
+//        if (client.getId() == null || !clientRepository.existsById(client.getId())) {
+//            throw new EntityNotFoundException("Клиент не найден");
+//        }
+//
+//        // Проверяем, что у клиента есть карта
+//        if (client.getCards() == null || client.getCards().isEmpty()) {
+//            throw new IllegalStateException("У клиента нет карты для совершения покупок");
+//        }
+//
+//        // Выводим текущее значение баланса клиента перед обновлением
+//        System.out.println("Текущий баланс клиента: " + client.getBalance());
+//
+//        // Выполняем обновление данных клиента в базе данных
+//        clientRepository.save(client);
+//
+//        // Выводим новое значение баланса клиента после обновления
+//        System.out.println("Новый баланс клиента: " + client.getBalance());
+//    }
 
-        // Выполняем обновление данных клиента в базе данных
-        clientRepository.save(client);
-    }
 
 }
 

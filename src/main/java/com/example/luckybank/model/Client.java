@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -23,17 +24,17 @@ public class Client {
     private String lastName;
     private String address;
     private String email;
-    private String balance;
+    private BigDecimal balance;
 
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Card> cards;
 
-    @ManyToMany
-    @JoinTable(name = "client_food",
-            joinColumns = @JoinColumn(name = "client_id"),
-            inverseJoinColumns = @JoinColumn(name = "food_id"))
-    private List<Food> foods;
+//    @ManyToMany
+//    @JoinTable(name = "client_food",
+//            joinColumns = @JoinColumn(name = "client_id"),
+//            inverseJoinColumns = @JoinColumn(name = "food_id"))
+//    private List<Food> foods;
 }
 
 

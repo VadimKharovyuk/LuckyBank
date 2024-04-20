@@ -1,7 +1,27 @@
-create table card (id bigserial not null, balance float(53) not null, card_number varchar(255), cvv varchar(255), expiration_date date, client_id bigint, primary key (id))
-create table client (id bigserial not null, address varchar(255), balance varchar(255), email varchar(255), last_name varchar(255), name varchar(255), primary key (id))
-
-
-
- create table client_food (client_id bigint not null, food_id bigint not null)
- create table food (id bigserial not null, description varchar(255), name varchar(255), price float(53) not null, primary key (id))
+-- CREATE TABLE card (
+--                       id BIGSERIAL NOT NULL,
+--                       balance DOUBLE PRECISION NOT NULL,
+--                       card_number VARCHAR(255),
+--                       cvv VARCHAR(255),
+--                       expiration_date DATE,
+--                       client_id BIGINT,
+--                       PRIMARY KEY (id)
+-- );
+--
+--
+--
+-- CREATE TABLE client (
+--                         id BIGSERIAL NOT NULL,
+--                         address VARCHAR(255),
+--                         balance DOUBLE PRECISION NOT NULL,
+--                         email VARCHAR(255),
+--                         last_name VARCHAR(255),
+--                         name VARCHAR(255),
+--                         PRIMARY KEY (id)
+-- );
+--
+--
+--
+--
+--  create table client_food (client_id bigint not null, food_id bigint not null)
+--  create table food (id bigserial not null, description varchar(255), name varchar(255), price float(53) not null, primary key (id))
