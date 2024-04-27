@@ -10,10 +10,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
@@ -32,25 +34,42 @@ public class CardController {
     }
 
     @PostMapping("/cards/createcard")
-    public String createCard(@RequestParam String cardNumber,
-                             @RequestParam Date expirationDate,
-                             @RequestParam String cvv,
-                             @RequestParam double balance,
-                             @RequestParam String clientName) {
+    public String createCard(
+            @RequestParam String cardNumber,
+            @RequestParam Date expirationDate,
+            @RequestParam String cvv,
+            @RequestParam double balance,
+            @RequestParam String clientName,
+            RedirectAttributes redirectAttributes) {
         // Получаем клиента по его имени из базы данных
-        Client client = clientService.getClientByName(clientName);
-        // Создаем новую карту
-        Card card = new Card();
-        card.setCardNumber(cardNumber);
-        card.setExpirationDate(expirationDate);
-        card.setCvv(cvv);
-        card.setBalance(balance);
-        card.setClient(client); // Связываем карту с клиентом
-        // Сохраняем карту в базе данных
-        cardService.createCard(card);
-        // Перенаправляем пользователя на главную страницу или куда-либо еще
-        return "redirect:/";
+        Optional<Client> optionalClient = clientService.getClientByName(clientName);
+
+        if (optionalClient.isPresent()) {
+            Client client = optionalClient.get();
+
+            // Создаем новую карту
+            Card card = new Card();
+            card.setCardNumber(cardNumber);
+            card.setExpirationDate(expirationDate);
+            card.setCvv(cvv);
+            card.setBalance(balance);
+            card.setClient(client); // Связываем карту с клиентом
+
+            // Сохраняем карту в базе данных
+            cardService.createCard(card);
+
+            // Перенаправляем пользователя на страницу успешного создания карты или на главную страницу
+            redirectAttributes.addFlashAttribute("successMessage", "Карта успешно создана!");
+            return "redirect:/cards"; // Направляем пользователя на страницу списка карт или на другую релевантную страницу
+        } else {
+            // Если клиент не найден, обрабатываем ошибку
+            redirectAttributes.addFlashAttribute("errorMessage", "Клиент не найден!");
+            return "redirect:/cards/create"; // Возвращаем пользователя на страницу создания карты или на другую релевантную страницу
+        }
     }
+
+
+
 
     @GetMapping("/cards")
     public String getAllCards(Model model) {

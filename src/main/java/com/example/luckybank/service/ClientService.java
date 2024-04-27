@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -25,10 +26,10 @@ public class ClientService {
 //        // Добавьте здесь логику для получения клиента по идентификатору
 //        return clientRepository.findById(id).orElse(null);
 //    }
+public Optional<Client> getClientByName(String name) {
+    return clientRepository.findOneByName(name);
+}
 
-    public Client getClientByName(String name) {
-        return clientRepository.findByName(name);
-    }
 
     public List<Client> getAllClients() {
         return clientRepository.findAll();

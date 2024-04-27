@@ -1,24 +1,25 @@
--- CREATE TABLE card (
---                       id BIGSERIAL NOT NULL,
---                       balance DOUBLE PRECISION NOT NULL,
---                       card_number VARCHAR(255),
---                       cvv VARCHAR(255),
---                       expiration_date DATE,
---                       client_id BIGINT,
---                       PRIMARY KEY (id)
--- );
---
---
---
--- CREATE TABLE client (
---                         id BIGSERIAL NOT NULL,
---                         address VARCHAR(255),
---                         balance DOUBLE PRECISION NOT NULL,
---                         email VARCHAR(255),
---                         last_name VARCHAR(255),
---                         name VARCHAR(255),
---                         PRIMARY KEY (id)
--- );
+CREATE TABLE card (
+                      id BIGSERIAL NOT NULL,
+                      balance DOUBLE PRECISION NOT NULL,
+                      card_number VARCHAR(255),
+                      cvv VARCHAR(255),
+                      expiration_date DATE,
+                      client_id BIGINT,
+                      PRIMARY KEY (id)
+);
+
+
+
+CREATE TABLE client (
+                        id BIGSERIAL PRIMARY KEY,
+                        name VARCHAR(255),
+                        last_name VARCHAR(255),
+                        email VARCHAR(255),
+                        address VARCHAR(255),
+                        balance DOUBLE PRECISION,
+                        UNIQUE (name)  -- Уникальный индекс на имя
+);
+
 --
 --
 --
