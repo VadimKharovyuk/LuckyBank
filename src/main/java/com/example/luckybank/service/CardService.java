@@ -117,6 +117,13 @@ public class CardService {
         LocalDate expirationLocalDate = LocalDate.now().plusYears(3);
         return Date.valueOf(expirationLocalDate);
     }
+    public void creditBalance(String cardNumber, double amount) throws CardNotFoundException {
+        Card card = getCardByNumber(cardNumber);
+        double currentBalance = card.getBalance();
+        card.setBalance(currentBalance + amount);
+        cardRepository.save(card);
+    }
+
 
 }
 

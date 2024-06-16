@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cards</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <nav class="mb-4">
+    <ul class="nav">
+      <li class="nav-item"><a class="nav-link" href="/">Главная страница</a></li>
+      <li class="nav-item"><a class="nav-link" href="/cards">Список всех карточек</a></li>
+      <li class="nav-item"><a class="nav-link" href="/sendmoney">Перевод денег</a></li>
+      <li class="nav-item"><a class="nav-link" href="/clients">Баланс Клиентов</a></li>
+      <li class="nav-item"><a class="nav-link" href="/total-balance">Общий баланс Lucky Bank</a></li>
+    </ul>
+  </nav>
+
+  <h1 class="mt-4">Карты</h1>
+
+  <!-- Сообщения об успехе и ошибках -->
+  <div th:if="${successMessage}" class="alert alert-success mt-4">
+    <p th:text="${successMessage}"></p>
+  </div>
+  <div th:if="${errorMessage}" class="alert alert-danger mt-4">
+    <p th:text="${errorMessage}"></p>
+  </div>
+
+  <table class="table mt-4">
+    <thead>
+    <tr>
+      <th>Номер карты</th>
+      <th>Срок действия</th>
+      <th>CVV</th>
+      <th>Баланс</th>
+      <th>Клиент</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="card : ${cards}">
+      <td th:text="${card.cardNumber}"></td>
+      <td th:text="${card.expirationDate}"></td>
+      <td th:text="${card.cvv}"></td>
+      <td th:text="${card.balance}"></td>
+      <td th:text="${card.client.name}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h2 class="mt-4">Пополнить баланс карты</h2>
+  <form action="/cards/credit" method="post" class="mt-4">
+    <div class="form-group">
+      <label for="cardNumber">Номер карты:</label>
+      <input type="text" id="cardNumber" name="cardNumber" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+      <label for="amount">Сумма пополнения:</label>
+      <input type="number" id="amount" name="amount" step="0.01" class="form-control" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Пополнить баланс</button>
+  </form>
+</div>
+
+<!-- Bootstrap JS и jQuery (необходимы для некоторых компонентов Bootstrap) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

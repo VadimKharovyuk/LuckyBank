@@ -1,22 +1,50 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Создать карту</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        form {
+            width: 50%;
+            margin: auto;
+        }
+
+        .alert {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-<h1>Создать карту</h1>
-<form action="#" th:action="@{/cards/createcard}" method="post">
-    <label for="clientName">Имя клиента:</label>
-    <input type="text" id="clientName" name="clientName" required>
-    <button type="submit">Создать карту</button>
-</form>
+<div class="container">
+    <h1 class="mt-4">Создать карту</h1>
+    <form action="#" th:action="@{/cards/createcard}" method="post" class="mt-4">
+        <div class="form-group">
+            <label for="clientName">Имя клиента:</label>
+            <input type="text" id="clientName" name="clientName" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Создать карту</button>
+    </form>
 
-<div th:if="${successMessage}">
-    <p th:text="${successMessage}"></p>
+    <div th:if="${successMessage}" class="alert alert-success mt-4">
+        <p th:text="${successMessage}"></p>
+    </div>
+
+    <div th:if="${errorMessage}" class="alert alert-danger mt-4">
+        <p th:text="${errorMessage}"></p>
+    </div>
 </div>
 
-<div th:if="${errorMessage}">
-    <p th:text="${errorMessage}"></p>
-</div>
+<!-- Bootstrap JS и jQuery (необходимы для некоторых компонентов Bootstrap) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
