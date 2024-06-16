@@ -23,6 +23,65 @@ public class CardController {
     private final CardService cardService;
     private final ClientService clientService;
 
+//    @GetMapping("/cards/create")
+//    public String showCreateCardForm(Model model) {
+//        // Получаем список всех клиентов из базы данных
+//        List<Client> clients = clientService.getAllClients();
+//        // Добавляем список клиентов в модель
+//        model.addAttribute("clients", clients);
+//        // Возвращаем имя представления
+//        return "create_card";
+//    }
+
+    //    @PostMapping("/cards/createcard")
+//    public String createCard(
+//            @RequestParam String cardNumber,
+//            @RequestParam Date expirationDate,
+//            @RequestParam String cvv,
+//            @RequestParam double balance,
+//            @RequestParam String clientName,
+//            RedirectAttributes redirectAttributes) {
+//        // Получаем клиента по его имени из базы данных
+//        Optional<Client> optionalClient = clientService.getClientByName(clientName);
+//
+//        if (optionalClient.isPresent()) {
+//            Client client = optionalClient.get();
+//
+//            // Создаем новую карту
+//            Card card = new Card();
+//            card.setCardNumber(cardNumber);
+//            card.setExpirationDate(expirationDate);
+//            card.setCvv(cvv);
+//            card.setBalance(balance);
+//            card.setClient(client); // Связываем карту с клиентом
+//
+//            // Сохраняем карту в базе данных
+//            cardService.createCard(card);
+//
+//            // Перенаправляем пользователя на страницу успешного создания карты или на главную страницу
+//            redirectAttributes.addFlashAttribute("successMessage", "Карта успешно создана!");
+//            return "redirect:/cards"; // Направляем пользователя на страницу списка карт или на другую релевантную страницу
+//        } else {
+//            // Если клиент не найден, обрабатываем ошибку
+//            redirectAttributes.addFlashAttribute("errorMessage", "Клиент не найден!");
+//            return "redirect:/cards/create"; // Возвращаем пользователя на страницу создания карты или на другую релевантную страницу
+//        }
+//    }
+    @PostMapping("/cards/createcard")
+    public String createCard(
+            @RequestParam String clientName,
+            RedirectAttributes redirectAttributes) {
+        try {
+            Card card = cardService.generateCard(clientName);
+            redirectAttributes.addFlashAttribute("successMessage", "Карта успешно создана с номером: " + card.getCardNumber());
+            return "redirect:/cards";
+        } catch (IllegalArgumentException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+            return "redirect:/cards/create";
+        }
+    }
+
+
     @GetMapping("/cards/create")
     public String showCreateCardForm(Model model) {
         // Получаем список всех клиентов из базы данных
@@ -30,45 +89,8 @@ public class CardController {
         // Добавляем список клиентов в модель
         model.addAttribute("clients", clients);
         // Возвращаем имя представления
-        return "create_card";
+        return "createCard";
     }
-
-    @PostMapping("/cards/createcard")
-    public String createCard(
-            @RequestParam String cardNumber,
-            @RequestParam Date expirationDate,
-            @RequestParam String cvv,
-            @RequestParam double balance,
-            @RequestParam String clientName,
-            RedirectAttributes redirectAttributes) {
-        // Получаем клиента по его имени из базы данных
-        Optional<Client> optionalClient = clientService.getClientByName(clientName);
-
-        if (optionalClient.isPresent()) {
-            Client client = optionalClient.get();
-
-            // Создаем новую карту
-            Card card = new Card();
-            card.setCardNumber(cardNumber);
-            card.setExpirationDate(expirationDate);
-            card.setCvv(cvv);
-            card.setBalance(balance);
-            card.setClient(client); // Связываем карту с клиентом
-
-            // Сохраняем карту в базе данных
-            cardService.createCard(card);
-
-            // Перенаправляем пользователя на страницу успешного создания карты или на главную страницу
-            redirectAttributes.addFlashAttribute("successMessage", "Карта успешно создана!");
-            return "redirect:/cards"; // Направляем пользователя на страницу списка карт или на другую релевантную страницу
-        } else {
-            // Если клиент не найден, обрабатываем ошибку
-            redirectAttributes.addFlashAttribute("errorMessage", "Клиент не найден!");
-            return "redirect:/cards/create"; // Возвращаем пользователя на страницу создания карты или на другую релевантную страницу
-        }
-    }
-
-
 
 
     @GetMapping("/cards")

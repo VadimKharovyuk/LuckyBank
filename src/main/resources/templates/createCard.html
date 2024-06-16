@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Создать карту</title>
+</head>
+<body>
+<h1>Создать карту</h1>
+<form action="#" th:action="@{/cards/createcard}" method="post">
+    <label for="clientName">Имя клиента:</label>
+    <input type="text" id="clientName" name="clientName" required>
+    <button type="submit">Создать карту</button>
+</form>
+
+<div th:if="${successMessage}">
+    <p th:text="${successMessage}"></p>
+</div>
+
+<div th:if="${errorMessage}">
+    <p th:text="${errorMessage}"></p>
+</div>
+</body>
+</html>

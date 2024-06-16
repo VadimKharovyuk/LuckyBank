@@ -1,13 +1,17 @@
 package com.example.luckybank.service;
-
 import com.example.luckybank.Exception.CardNotFoundException;
 import com.example.luckybank.Exception.InsufficientFundsException;
 import com.example.luckybank.model.Card;
+import com.example.luckybank.model.Client;
 import com.example.luckybank.repositoty.CardRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import java.security.SecureRandom;
+import java.sql.Date;
+import java.time.LocalDate;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 
@@ -16,6 +20,8 @@ import java.util.function.Supplier;
 public class CardService {
 
     private final CardRepository cardRepository;
+    private final ClientService clientService;
+    private static final SecureRandom random = new SecureRandom();
 
 
     public Card createCard(Card card) {
@@ -55,8 +61,6 @@ public class CardService {
         return cards.get(0);
     }
 
-
-    // Метод для проверки баланса и списания средств с карты отправителя
     public void debitBalance(String senderCardNumber, double amount) throws CardNotFoundException, InsufficientFundsException {
         Card senderCard = getCardByNumber(senderCardNumber);
         double currentBalance = senderCard.getBalance();
@@ -70,7 +74,49 @@ public class CardService {
     public List<Card> getCardsByClientId(Long id) {
         return cardRepository.findByClientId(id);
     }
+    public Card generateCard(String clientName) {
+        Optional<Client> optionalClient = clientService.getClientByName(clientName);
+        if (optionalClient.isPresent()) {
+            Client client = optionalClient.get();
 
+            String cardNumber = generateCardNumber();
+            String cvv = generateCVV();
+            Date expirationDate = generateExpirationDate();
+
+            Card card = new Card();
+            card.setCardNumber(cardNumber);
+            card.setExpirationDate(expirationDate);
+            card.setCvv(cvv);
+            card.setBalance(0); // Начальный баланс
+            card.setClient(client);
+
+            return cardRepository.save(card);
+        } else {
+            throw new IllegalArgumentException("Клиент с именем " + clientName + "не найден!");
+        }
+    }
+
+    private String generateCardNumber() {
+        StringBuilder cardNumber = new StringBuilder();
+        for (int i = 0; i < 16; i++) {
+            cardNumber.append(random.nextInt(10));
+        }
+        return cardNumber.toString();
+    }
+
+    private String generateCVV() {
+        StringBuilder cvv = new StringBuilder();
+        for (int i = 0; i < 3; i++) {
+            cvv.append(random.nextInt(10));
+        }
+        return cvv.toString();
+    }
+
+    private Date generateExpirationDate() {
+        // Устанавливаем срок действия карты на 3 года с текущего момента
+        LocalDate expirationLocalDate = LocalDate.now().plusYears(3);
+        return Date.valueOf(expirationLocalDate);
+    }
 
 }
 
