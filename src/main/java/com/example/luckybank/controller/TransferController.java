@@ -6,12 +6,12 @@ import com.example.luckybank.сonfiguration.TransferSender;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-@Slf4j
 @Controller
 @AllArgsConstructor
 public class TransferController {
@@ -28,19 +28,20 @@ public class TransferController {
     public String transferFunds(@RequestParam("senderCardNumber") String senderCardNumber,
                                 @RequestParam("recipientCardNumber") String recipientCardNumber,
                                 @RequestParam("amount") double amount) throws Throwable {
-        // Передаем данные перевода сервису для выполнения
-        log.info("money alredu send ");
-        System.out.println("деньги отправлены ");
+        System.out.println("Перевод успешно отправлен в обработку ");
        transferSender.send(senderCardNumber, recipientCardNumber, amount);
-        // Перенаправляем пользователя на страницу с подтверждением
         return "redirect:/confirmation";
     }
 //@PostMapping("/transfer")
-//public String transferFunds(@RequestBody TransferMessage transferRequest) {
+//public ResponseEntity<String> transferFunds(@RequestBody TransferMessage transferRequest) {
 //    // Отправляем данные перевода в очередь
 //    transferSender.send(transferRequest.getSenderCardNumber(), transferRequest.getRecipientCardNumber(), transferRequest.getAmount());
-//    // Перенаправляем пользователя на страницу с подтверждением
-//    return "redirect:/confirmation";
+//
+//    // Печатаем сообщение в консоль для отладки или логирования
+//    System.out.println("Деньги отправлены пользователю");
+//
+//    // Возвращаем ResponseEntity с сообщением об успешном выполнении операции
+//    return ResponseEntity.ok("Перевод успешно отправлен в обработку");
 //}
 
     @GetMapping("/confirmation")
