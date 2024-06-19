@@ -13,12 +13,18 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    static final String queueName = "transferQueue";
+    static final String transferQueueName = "transferQueue";
+    static final String newQueueName = "newTransferQueue";
     static final String exchangeName = "transferExchange";
 
     @Bean
-    Queue queue() {
-        return new Queue(queueName, false);
+    Queue transferQueue() {
+        return new Queue(transferQueueName, false);
+    }
+
+    @Bean
+    Queue newQueue() {
+        return new Queue(newQueueName, false);
     }
 
     @Bean
@@ -27,8 +33,13 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public Binding binding(Queue queue, FanoutExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange);
+    public Binding transferBinding(Queue transferQueue, FanoutExchange exchange) {
+        return BindingBuilder.bind(transferQueue).to(exchange);
+    }
+
+    @Bean
+    public Binding newBinding(Queue newQueue, FanoutExchange exchange) {
+        return BindingBuilder.bind(newQueue).to(exchange);
     }
 
     @Bean

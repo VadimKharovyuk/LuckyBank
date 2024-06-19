@@ -14,4 +14,5 @@ public class TransferSender {
         rabbitTemplate.convertAndSend( RabbitMQConfig.exchangeName, "", transferMessage);
     }
 
+
 }
