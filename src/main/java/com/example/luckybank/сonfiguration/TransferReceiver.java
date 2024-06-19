@@ -13,13 +13,20 @@ public class TransferReceiver {
     private final TransferService transferService;
 
     @RabbitListener(queues = "transferQueue")
-    public void receiveTransferMessage(TransferMessage transferMessage) throws Throwable {
-        transferService.transfer(
-                transferMessage.getSenderCardNumber(),
-                transferMessage.getRecipientCardNumber(),
-                transferMessage.getAmount()
-        );
-        System.out.println("transferQueue трансфер отправил " +transferMessage.getAmount() );
+    public void receiveTransferMessage(TransferMessage transferMessage) {
+        try {
+            transferService.transfer(
+                    transferMessage.getSenderCardNumber(),
+                    transferMessage.getRecipientCardNumber(),
+                    transferMessage.getAmount()
+            );
+            System.out.println("Первый консюмер обработал сообщение: " + transferMessage.getAmount());
+        } catch (Exception e) {
+            // Обработка ошибок
+            System.err.println("Ошибка при обработке сообщения из очереди transferQueue: " + e.getMessage());
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @RabbitListener(queues = "newTransferQueue")
@@ -30,11 +37,12 @@ public class TransferReceiver {
                     transferMessage.getRecipientCardNumber(),
                     transferMessage.getAmount()
             );
-            System.out.println("newTransferQueue трансфер отправил " + transferMessage.getAmount());
+            System.out.println("Второй консюмер обработал сообщение: " + transferMessage.getAmount());
+        } catch (Exception e) {
+            // Обработка ошибок
+            System.err.println("Ошибка при обработке сообщения из очереди newTransferQueue: " + e.getMessage());
         } catch (Throwable e) {
-            // Обработка ошибок, например, логирование исключения
-            System.err.println("Ошибка при обработке сообщения из новой очереди: " + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
-
 }
