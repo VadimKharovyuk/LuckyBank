@@ -26,7 +26,7 @@ public class TransferReceiver {
         }
     }
 
-    @RabbitListener(queues = "newTransferQueue")
+    @RabbitListener(queues = "transferQueue")
     public void receiveNewMessage(TransferMessage transferMessage) {
         try {
             transferService.transfer(

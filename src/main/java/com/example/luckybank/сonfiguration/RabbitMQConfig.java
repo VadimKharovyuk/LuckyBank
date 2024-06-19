@@ -14,19 +14,13 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfig {
 
     static final String transferQueueName = "transferQueue";
-    static final String newQueueName = "newTransferQueue";
+
     static final String exchangeName = "transferExchange";
 
     @Bean
     Queue transferQueue() {
         return new Queue(transferQueueName, false);
     }
-
-    @Bean
-    Queue newQueue() {
-        return new Queue(newQueueName, false);
-    }
-
     @Bean
     public FanoutExchange exchange() {
         return new FanoutExchange(exchangeName);
@@ -53,4 +47,6 @@ public class RabbitMQConfig {
         template.setMessageConverter(converter);
         return template;
     }
+
+
 }

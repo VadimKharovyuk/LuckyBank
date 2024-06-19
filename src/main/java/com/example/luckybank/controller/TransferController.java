@@ -29,10 +29,8 @@ public class TransferController {
         // Проверка баланса отправителя
         double senderBalance = transferService.transfer(senderCardNumber,recipientCardNumber,amount);
         if (senderBalance < amount) {
-            // Если недостаточно средств, возвращаем сообщение об ошибке или выбрасываем исключение
             throw new InsufficientFundsException("Недостаточно средств на счете отправителя");
         }
-
 
         // Если достаточно средств, отправляем сообщение в RabbitMQ
         System.out.println("Перевод успешно отправлен в обработку ");
