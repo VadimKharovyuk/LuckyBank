@@ -1,7 +1,5 @@
 package com.example.luckybank.сonfiguration;
-
 import com.example.luckybank.service.TransferService;
-import com.example.luckybank.сonfiguration.TransferMessage;
 import lombok.AllArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
@@ -22,7 +20,6 @@ public class TransferReceiver {
             );
             System.out.println("Первый консюмер обработал сообщение: " + transferMessage.getAmount());
         } catch (Exception e) {
-            // Обработка ошибок
             System.err.println("Ошибка при обработке сообщения из очереди transferQueue: " + e.getMessage());
         } catch (Throwable e) {
             throw new RuntimeException(e);
@@ -39,7 +36,6 @@ public class TransferReceiver {
             );
             System.out.println("Второй консюмер обработал сообщение: " + transferMessage.getAmount());
         } catch (Exception e) {
-            // Обработка ошибок
             System.err.println("Ошибка при обработке сообщения из очереди newTransferQueue: " + e.getMessage());
         } catch (Throwable e) {
             throw new RuntimeException(e);

@@ -1,5 +1,6 @@
 package com.example.luckybank.controller;
 
+import com.example.luckybank.Exception.InsufficientFundsException;
 import com.example.luckybank.service.TransferService;
 import com.example.luckybank.сonfiguration.TransferMessage;
 import com.example.luckybank.сonfiguration.TransferSender;
@@ -25,10 +26,21 @@ public class TransferController {
     public String transferFunds(@RequestParam("senderCardNumber") String senderCardNumber,
                                 @RequestParam("recipientCardNumber") String recipientCardNumber,
                                 @RequestParam("amount") double amount) throws Throwable {
+        // Проверка баланса отправителя
+        double senderBalance = transferService.transfer(senderCardNumber,recipientCardNumber,amount);
+        if (senderBalance < amount) {
+            // Если недостаточно средств, возвращаем сообщение об ошибке или выбрасываем исключение
+            throw new InsufficientFundsException("Недостаточно средств на счете отправителя");
+        }
+
+
+        // Если достаточно средств, отправляем сообщение в RabbitMQ
         System.out.println("Перевод успешно отправлен в обработку ");
-       transferSender.send(senderCardNumber, recipientCardNumber, amount);
+        transferSender.send(senderCardNumber, recipientCardNumber, amount);
+
         return "redirect:/confirmation";
     }
+
 
 
     @GetMapping("/confirmation")

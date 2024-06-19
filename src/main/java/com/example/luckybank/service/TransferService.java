@@ -12,7 +12,7 @@ public class TransferService {
 
     private final CardService cardService;
 
-    public void transfer(String senderCardNumber, String recipientCardNumber, double amount) throws Throwable {
+    public double transfer(String senderCardNumber, String recipientCardNumber, double amount) throws Throwable {
         // Получаем информацию о картах отправителя и получателя
         Card senderCard = cardService.getCardByNumber(senderCardNumber);
         Card recipientCard = cardService.getCardByNumber(recipientCardNumber);
@@ -30,5 +30,6 @@ public class TransferService {
         } else {
             throw new InsufficientFundsException("Недостаточно средств на счете отправителя");
         }
+        return amount;
     }
 }
