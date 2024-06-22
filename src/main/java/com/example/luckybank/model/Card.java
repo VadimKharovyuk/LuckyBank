@@ -21,6 +21,7 @@ public class Card {
     private String cardNumber;
     private Date expirationDate;
     private String cvv;
+
     private double balance;
 
     @ManyToOne

@@ -27,7 +27,7 @@ public class Client  {
     private String address;
     private String email;
 
-    private BigDecimal balance;
+//    private BigDecimal balance;
 
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)

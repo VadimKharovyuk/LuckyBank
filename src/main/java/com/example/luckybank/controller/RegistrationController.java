@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.*;
 public class RegistrationController {
 
     private final ClientService clientService;
-    private final EmailService emailService;
+    private final EmailService emailService ;
+
 
     @GetMapping
     public String showRegistrationForm() {
         return "registration"; // Имя представления (шаблона) для отображения формы регистрации
     }
+
 
     @PostMapping
     public String processRegistrationForm(@RequestParam String name,
@@ -33,11 +35,11 @@ public class RegistrationController {
         newClient.setAddress(address);
         newClient.setEmail(email);
 
-        // Сохраняем клиента в банке
-        clientService.createClient(newClient);
+        // Сохраняем клиента в базе данных
+        Client savedClient = clientService.createClient(newClient);
 
-        // Отправляем сообщение на почту о успешной регистрации
-        emailService.sendRegistrationConfirmationEmail(email, newClient);
+        // Отправка приветственного письма
+        emailService.sendWelcomeEmail(savedClient);
 
         // Перенаправляем пользователя на другую страницу после успешной регистрации
         return "redirect:/";

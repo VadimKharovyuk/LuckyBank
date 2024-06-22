@@ -1,31 +1,39 @@
 package com.example.luckybank.service;
+
 import com.example.luckybank.model.Client;
-import com.example.luckybank.сonfiguration.EmailProducer;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
 public class EmailService {
-    private final EmailProducer emailProducer;
 
-    public void sendRegistrationConfirmationEmail(String recipientEmail, Client newClient) {
-        if (recipientEmail == null || newClient == null) {
-            throw new IllegalArgumentException("recipientEmail and newClient must not be null");
-        }
+    private  final JavaMailSender mailSender;
 
-        String subject = "Регистрация успешно завершена";
-        String messageText = "Уважаемый " + newClient.getName() + ",\n\n";
-        messageText += "Спасибо за регистрацию в нашем банке!\n";
-        messageText += "Ваша регистрация успешно завершена.\n\n";
-        messageText += "Детали вашего аккаунта:\n";
-        messageText += "Имя: " + newClient.getName() + "\n";
-        messageText += "Фамилия: " + newClient.getLastName() + "\n";
-        messageText += "Адрес: " + newClient.getAddress() + "\n";
-        messageText += "Email: " + newClient.getEmail() + "\n\n";
-        messageText += "С уважением,\nВаш Lucky Bank";
-
-        EmailMessage emailMessage = new EmailMessage(recipientEmail, subject, messageText);
-        emailProducer.sendEmailMessage(emailMessage);
+    public void sendEmail(String to, String subject, String text) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(text);
+        mailSender.send(message);
     }
+
+    public void sendWelcomeEmail(Client client) {
+        String subject = "Добро пожаловать в наш банк!";
+        String text = "Уважаемый(ая) " + client.getName() + " " + client.getLastName() + ",\n\n" +
+                "Мы рады приветствовать вас в нашем банке! Спасибо за регистрацию.\n" +
+                "Вы стали частью нашего сообщества, где мы стремимся предоставлять высококачественные финансовые услуги и поддержку.\n\n" +
+                "Если у вас возникнут вопросы или вам потребуется помощь, пожалуйста, не стесняйтесь обращаться к нашей службе поддержки.\n\n" +
+                "С наилучшими пожеланиями,\n" +
+                "Команда " + "Lucky Bank" + "\n" +
+                "Телефон: +123456789\n" +
+                "Email: info@examplebank.com";
+
+        sendEmail(client.getEmail(), subject, text);
+    }
+
 }
+

@@ -3,7 +3,6 @@ package com.example.luckybank.controller;
 import com.example.luckybank.model.Card;
 import com.example.luckybank.model.Client;
 import com.example.luckybank.service.ClientService;
-import com.example.luckybank.service.EmailService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
