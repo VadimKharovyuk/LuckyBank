@@ -1,5 +1,4 @@
 package com.example.luckybank.сonfiguration;//package com.example.luckybank.сonfiguration;
-//
 //import org.springframework.amqp.core.Binding;
 //import org.springframework.amqp.core.BindingBuilder;
 //import org.springframework.amqp.core.Queue;
@@ -14,13 +13,13 @@ package com.example.luckybank.сonfiguration;//package com.example.luckybank.сo
 //public class RabbitMQConfig {
 //
 //    static final String transferQueueName = "transferQueue";
-//
 //    static final String exchangeName = "transferExchange";
 //
 //    @Bean
 //    Queue transferQueue() {
 //        return new Queue(transferQueueName, false);
 //    }
+//
 //    @Bean
 //    public FanoutExchange exchange() {
 //        return new FanoutExchange(exchangeName);
@@ -30,7 +29,6 @@ package com.example.luckybank.сonfiguration;//package com.example.luckybank.сo
 //    public Binding transferBinding(Queue transferQueue, FanoutExchange exchange) {
 //        return BindingBuilder.bind(transferQueue).to(exchange);
 //    }
-//
 //
 //    @Bean
 //    public Jackson2JsonMessageConverter jsonMessageConverter() {
@@ -43,16 +41,13 @@ package com.example.luckybank.сonfiguration;//package com.example.luckybank.сo
 //        template.setMessageConverter(converter);
 //        return template;
 //    }
-//
-//
 //}
 //
 
-
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.FanoutExchange;
+import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
@@ -64,6 +59,8 @@ public class RabbitMQConfig {
 
     static final String transferQueueName = "transferQueue";
     static final String exchangeName = "transferExchange";
+//    static final String welcomeQueueName = "welcomeQueue";
+//    static final String welcomeExchangeName = "welcomeExchange";
 
     @Bean
     Queue transferQueue() {
@@ -75,9 +72,24 @@ public class RabbitMQConfig {
         return new FanoutExchange(exchangeName);
     }
 
+//    @Bean
+//    Queue welcomeQueue() {
+//        return new Queue(welcomeQueueName, false);
+//    }
+//
+//    @Bean
+//    public FanoutExchange welcomeExchange() {
+//        return new FanoutExchange(welcomeExchangeName);
+//    }
+
     @Bean
     public Binding transferBinding(Queue transferQueue, FanoutExchange exchange) {
         return BindingBuilder.bind(transferQueue).to(exchange);
+    }
+
+    @Bean
+    public Binding welcomeBinding(Queue welcomeQueue, FanoutExchange welcomeExchange) {
+        return BindingBuilder.bind(welcomeQueue).to(welcomeExchange);
     }
 
     @Bean

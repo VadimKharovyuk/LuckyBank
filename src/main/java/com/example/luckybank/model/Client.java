@@ -16,7 +16,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Client  {
+public class Client  implements Serializable {
 
 
     @Id
@@ -27,7 +27,6 @@ public class Client  {
     private String address;
     private String email;
 
-//    private BigDecimal balance;
 
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)

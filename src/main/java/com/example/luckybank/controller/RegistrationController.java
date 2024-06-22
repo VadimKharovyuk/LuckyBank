@@ -38,11 +38,12 @@ public class RegistrationController {
         // Сохраняем клиента в базе данных
         Client savedClient = clientService.createClient(newClient);
 
-        // Отправка приветственного письма
+        // Отправляем приветственное письмо в RabbitMQ
         emailService.sendWelcomeEmail(savedClient);
 
         // Перенаправляем пользователя на другую страницу после успешной регистрации
         return "redirect:/";
     }
+
 
 }

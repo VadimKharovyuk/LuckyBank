@@ -2,6 +2,7 @@ package com.example.luckybank.service;
 
 import com.example.luckybank.model.Client;
 import lombok.AllArgsConstructor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -11,7 +12,13 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class EmailService {
 
-    private  final JavaMailSender mailSender;
+
+//    private final RabbitTemplate rabbitTemplate;
+//
+//    static final String welcomeExchangeName = "welcomeExchange";
+
+//
+    private JavaMailSender mailSender;
 
     public void sendEmail(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -28,7 +35,7 @@ public class EmailService {
                 "Вы стали частью нашего сообщества, где мы стремимся предоставлять высококачественные финансовые услуги и поддержку.\n\n" +
                 "Если у вас возникнут вопросы или вам потребуется помощь, пожалуйста, не стесняйтесь обращаться к нашей службе поддержки.\n\n" +
                 "С наилучшими пожеланиями,\n" +
-                "Команда " + "Lucky Bank" + "\n" +
+                "Команда " + "Название вашего банка" + "\n" +
                 "Телефон: +123456789\n" +
                 "Email: info@examplebank.com";
 
