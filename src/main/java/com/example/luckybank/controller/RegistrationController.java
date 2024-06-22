@@ -4,6 +4,7 @@ import com.example.luckybank.model.Client;
 import com.example.luckybank.service.ClientService;
 import com.example.luckybank.service.EmailService;
 import lombok.AllArgsConstructor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ public class RegistrationController {
 
     private final ClientService clientService;
     private final EmailService emailService ;
+    private final RabbitTemplate rabbitTemplate;
 
 
     @GetMapping
@@ -40,8 +42,8 @@ public class RegistrationController {
 
         // Отправляем приветственное письмо в RabbitMQ
         emailService.sendWelcomeEmail(savedClient);
+        rabbitTemplate.convertAndSend("welcomeExchange", "", newClient);
 
-        // Перенаправляем пользователя на другую страницу после успешной регистрации
         return "redirect:/";
     }
 

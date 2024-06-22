@@ -10,13 +10,12 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class WelcomeEmailListener {
     private final EmailService emailService;
-    private final RabbitTemplate rabbitTemplate;
 
 
     @RabbitListener(queues = "welcomeQueue")
     public void receiveWelcomeMessage(Client client) {
-        // Логика для обработки приветственного сообщения
+        System.out.println("Очередь welcomeQueue " +client.getName());
         emailService.sendWelcomeEmail(client);
-        rabbitTemplate.convertAndSend("welcomeExchange", "", client);
+
     }
 }
