@@ -22,10 +22,7 @@ public class ClientService {
         return clientRepository.save(client);
     }
 
-//    public Client getClientById(Long id) {
-//        // Добавьте здесь логику для получения клиента по идентификатору
-//        return clientRepository.findById(id).orElse(null);
-//    }
+
 public Optional<Client> getClientByName(String name) {
     return clientRepository.findOneByName(name);
 }
@@ -45,26 +42,6 @@ public Optional<Client> getClientByName(String name) {
                 .orElseThrow(() -> new EntityNotFoundException("Клиент с id " + id + " не найден"));
     }
 
-//    public void updateClient(Client client) {
-//        // Проверяем, что клиент существует в базе данных
-//        if (client.getId() == null || !clientRepository.existsById(client.getId())) {
-//            throw new EntityNotFoundException("Клиент не найден");
-//        }
-//
-//        // Проверяем, что у клиента есть карта
-//        if (client.getCards() == null || client.getCards().isEmpty()) {
-//            throw new IllegalStateException("У клиента нет карты для совершения покупок");
-//        }
-//
-//        // Выводим текущее значение баланса клиента перед обновлением
-//        System.out.println("Текущий баланс клиента: " + client.getBalance());
-//
-//        // Выполняем обновление данных клиента в базе данных
-//        clientRepository.save(client);
-//
-//        // Выводим новое значение баланса клиента после обновления
-//        System.out.println("Новый баланс клиента: " + client.getBalance());
-//    }
 
 
 }

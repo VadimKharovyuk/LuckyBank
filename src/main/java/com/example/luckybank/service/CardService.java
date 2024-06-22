@@ -23,20 +23,9 @@ public class CardService {
     private final ClientService clientService;
     private static final SecureRandom random = new SecureRandom();
 
-
-    public Card createCard(Card card) {
-        return cardRepository.save(card);
-    }
-
-
     public void deleteCardById(Long id) {
         cardRepository.deleteById(id);
     }
-
-    public Card orElseThrow(Supplier<? extends RuntimeException> exceptionSupplier) {
-        throw exceptionSupplier.get();
-    }
-
 
     public void saveCard(Card card) {
         cardRepository.save(card);

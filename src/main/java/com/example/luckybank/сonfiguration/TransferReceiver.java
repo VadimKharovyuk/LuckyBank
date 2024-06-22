@@ -36,7 +36,7 @@ public class TransferReceiver {
             );
             System.out.println("Второй консюмер обработал сообщение: " + transferMessage.getAmount());
         } catch (Exception e) {
-            System.err.println("Ошибка при обработке сообщения из очереди newTransferQueue: " + e.getMessage());
+            System.err.println("Ошибка при обработке сообщения из очереди transferQueue: " + e.getMessage());
         } catch (Throwable e) {
             throw new RuntimeException(e);
         }

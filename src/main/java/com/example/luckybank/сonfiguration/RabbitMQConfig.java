@@ -31,10 +31,6 @@ public class RabbitMQConfig {
         return BindingBuilder.bind(transferQueue).to(exchange);
     }
 
-    @Bean
-    public Binding newBinding(Queue newQueue, FanoutExchange exchange) {
-        return BindingBuilder.bind(newQueue).to(exchange);
-    }
 
     @Bean
     public Jackson2JsonMessageConverter jsonMessageConverter() {

@@ -3,6 +3,7 @@ package com.example.luckybank.service;
 import com.example.luckybank.Exception.InsufficientFundsException;
 import com.example.luckybank.model.Card;
 import lombok.AllArgsConstructor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,6 +31,7 @@ public class TransferService {
         } else {
             throw new InsufficientFundsException("Недостаточно средств на счете отправителя");
         }
+
         return amount;
     }
 }
