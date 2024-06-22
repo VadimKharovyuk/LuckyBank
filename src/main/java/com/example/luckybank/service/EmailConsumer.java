@@ -25,6 +25,7 @@ public class EmailConsumer {
             helper.setText(emailMessage.getBody());
 
             javaMailSender.send(message);
+            System.out.println("Очередь регистираци отработала -transferQueue, ");
         } catch (MessagingException | MailException e) {
             e.printStackTrace();
         }

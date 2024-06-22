@@ -1,11 +1,13 @@
 package com.example.luckybank.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -14,7 +16,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Client {
+public class Client implements Serializable {
 
 
     @Id
@@ -24,6 +26,7 @@ public class Client {
     private String lastName;
     private String address;
     private String email;
+
     private BigDecimal balance;
 
 

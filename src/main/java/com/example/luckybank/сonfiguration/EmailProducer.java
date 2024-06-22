@@ -19,7 +19,7 @@ public class EmailProducer {
     }
 
     public void sendEmailMessage(EmailMessage emailMessage) {
-        System.out.println("Очередь EmailMessage  отработала ");
+
 
         rabbitTemplate.convertAndSend(exchange, "", emailMessage);
     }
