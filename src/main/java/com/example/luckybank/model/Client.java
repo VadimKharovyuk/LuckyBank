@@ -16,7 +16,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Client implements Serializable {
+public class Client  {
 
 
     @Id

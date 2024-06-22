@@ -1,7 +1,6 @@
-package com.example.luckybank.сonfiguration;
+package com.example.luckybank.сonfiguration;//package com.example.luckybank.сonfiguration;
 
 import com.example.luckybank.service.EmailMessage;
-import lombok.AllArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -19,8 +18,13 @@ public class EmailProducer {
     }
 
     public void sendEmailMessage(EmailMessage emailMessage) {
+        System.out.println("Очередь  отправки сообщений отработала " +emailMessage.getRecipientEmail());
 
 
         rabbitTemplate.convertAndSend(exchange, "", emailMessage);
     }
 }
+
+
+
+
