@@ -12,13 +12,8 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class EmailService {
 
+    private  final  JavaMailSender mailSender;
 
-//    private final RabbitTemplate rabbitTemplate;
-//
-//    static final String welcomeExchangeName = "welcomeExchange";
-
-//
-    private JavaMailSender mailSender;
 
     public void sendEmail(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -40,6 +35,7 @@ public class EmailService {
                 "Email: info@examplebank.com";
 
         sendEmail(client.getEmail(), subject, text);
+        // Отправляем сообщение в welcomeExchange
     }
 
 }

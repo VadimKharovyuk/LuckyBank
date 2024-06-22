@@ -33,7 +33,6 @@ public class TransferController {
         }
 
         // Если достаточно средств, отправляем сообщение в RabbitMQ
-        System.out.println("Перевод успешно отправлен в обработку ");
         transferSender.send(senderCardNumber, recipientCardNumber, amount);
 
         return "redirect:/confirmation";

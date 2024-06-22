@@ -59,8 +59,8 @@ public class RabbitMQConfig {
 
     static final String transferQueueName = "transferQueue";
     static final String exchangeName = "transferExchange";
-//    static final String welcomeQueueName = "welcomeQueue";
-//    static final String welcomeExchangeName = "welcomeExchange";
+    static final String welcomeQueueName = "welcomeQueue";
+    static final String welcomeExchangeName = "welcomeExchange";
 
     @Bean
     Queue transferQueue() {
@@ -72,24 +72,24 @@ public class RabbitMQConfig {
         return new FanoutExchange(exchangeName);
     }
 
-//    @Bean
-//    Queue welcomeQueue() {
-//        return new Queue(welcomeQueueName, false);
-//    }
-//
-//    @Bean
-//    public FanoutExchange welcomeExchange() {
-//        return new FanoutExchange(welcomeExchangeName);
-//    }
-
     @Bean
-    public Binding transferBinding(Queue transferQueue, FanoutExchange exchange) {
-        return BindingBuilder.bind(transferQueue).to(exchange);
+    Queue welcomeQueue() {
+        return new Queue(welcomeQueueName, false);
     }
 
     @Bean
     public Binding welcomeBinding(Queue welcomeQueue, FanoutExchange welcomeExchange) {
         return BindingBuilder.bind(welcomeQueue).to(welcomeExchange);
+    }
+
+    @Bean
+    public FanoutExchange welcomeExchange() {
+        return new FanoutExchange(welcomeExchangeName);
+    }
+
+    @Bean
+    public Binding transferBinding(Queue transferQueue, FanoutExchange exchange) {
+        return BindingBuilder.bind(transferQueue).to(exchange);
     }
 
     @Bean

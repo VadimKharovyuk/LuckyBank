@@ -19,7 +19,7 @@ public class RegistrationController {
 
     @GetMapping
     public String showRegistrationForm() {
-        return "registration"; // Имя представления (шаблона) для отображения формы регистрации
+        return "registration";
     }
 
 
