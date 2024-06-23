@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,10 +28,10 @@ public class Card {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
-    //balance null fix 
 
-    public Card orElseThrow(Object o) {
-        throw new CardNotFoundException("Карта не найдена");
-    }
+    @OneToMany(mappedBy = "senderCard", cascade = CascadeType.REMOVE)
+    private List<Transfer> outgoingTransfers;
+
+
 
 }

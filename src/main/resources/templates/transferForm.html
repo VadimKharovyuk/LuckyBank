@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Данные карты</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1>Введите данные карты</h1>
+<form action="/history" method="post">
+    <label for="cardNumber">Номер карты:</label>
+    <input type="text" id="cardNumber" name="cardNumber" required><br><br>
+    <input type="submit" value="Получить историю переводов">
+</form>
+</body>
+</html>

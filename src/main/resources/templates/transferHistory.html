@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>История переводов</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1>История переводов для карты: <span th:text="${cardNumber}"></span></h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Отправитель</th>
+        <th>Получатель</th>
+        <th>Сумма</th>
+        <th>Дата и время</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="transfer : ${transfers}">
+        <td th:text="${transfer.senderCard.cardNumber}"></td>
+        <td th:text="${transfer.recipientCard.cardNumber}"></td>
+        <td th:text="${transfer.amount}"></td>
+        <td th:text="${#dates.format(transfer.timestamp, 'dd-MM-yyyy HH:mm:ss')}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
