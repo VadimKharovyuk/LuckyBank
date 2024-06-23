@@ -3,26 +3,79 @@
 <head>
     <title>История переводов</title>
     <meta charset="UTF-8">
+    <!-- Подключение Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Подключение jQuery для обновления времени -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            function updateTime() {
+                var now = new Date();
+                var hours = now.getHours().toString().padStart(2, '0');
+                var minutes = now.getMinutes().toString().padStart(2, '0');
+                var seconds = now.getSeconds().toString().padStart(2, '0');
+                var timeString = hours + ':' + minutes + ':' + seconds;
+                $('#currentTime').text(timeString);
+            }
+            setInterval(updateTime, 1000);
+        });
+    </script>
 </head>
 <body>
-<h1>История переводов для карты: <span th:text="${cardNumber}"></span></h1>
-<table border="1">
-    <thead>
-    <tr>
-        <th>Отправитель</th>
-        <th>Получатель</th>
-        <th>Сумма</th>
-        <th>Дата и время</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="transfer : ${transfers}">
-        <td th:text="${transfer.senderCard.cardNumber}"></td>
-        <td th:text="${transfer.recipientCard.cardNumber}"></td>
-        <td th:text="${transfer.amount}"></td>
-        <td th:text="${#dates.format(transfer.timestamp, 'dd-MM-yyyy HH:mm:ss')}"></td>
-    </tr>
-    </tbody>
-</table>
+<!-- Навигационная панель -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">LuckyBank</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Главная страница</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/cards">Список всех карточек</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/sendmoney">Перевод денег</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/clients">Баланс клиентов</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/form">История переводов</a>
+            </li>
+        </ul>
+    </div>
+    <div class="ml-auto" id="currentTime"></div>
+</nav>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1>История переводов для карты: <span th:text="${cardNumber}"></span></h1>
+    </div>
+    <table class="table table-bordered mt-4">
+        <thead class="thead-light">
+        <tr>
+            <th>Отправитель</th>
+            <th>Получатель</th>
+            <th>Сумма</th>
+            <th>Дата и время</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="transfer : ${transfers}">
+            <td th:text="${transfer.senderCard.cardNumber}"></td>
+            <td th:text="${transfer.recipientCard.cardNumber}"></td>
+            <td th:text="${transfer.amount}"></td>
+            <td th:text="${#dates.format(transfer.timestamp, 'dd-MM-yyyy HH:mm:ss')}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Подключение Bootstrap JS и зависимостей -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>
