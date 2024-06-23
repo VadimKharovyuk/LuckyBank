@@ -40,7 +40,7 @@ public class RegistrationController {
         // Сохраняем клиента в базе данных
         Client savedClient = clientService.createClient(newClient);
 
-        // Отправляем приветственное письмо в RabbitMQ
+        // Отправляем приветственное письмо
         emailService.sendWelcomeEmail(savedClient);
         rabbitTemplate.convertAndSend("welcomeExchange", "", newClient);
 

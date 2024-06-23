@@ -1,8 +1,7 @@
-FROM openjdk:17
+FROM openjdk:17-jdk-slim
 
-WORKDIR /luckyBank
+WORKDIR /app
 
+COPY target/*.jar app.jar
 
-COPY target/LuckyBank-0.0.1-SNAPSHOT.jar /luckyBank/LuckyBank-0.0.1-SNAPSHOT.jar
-
-CMD ["java", "-jar", "LuckyBank-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "app.jar"]
