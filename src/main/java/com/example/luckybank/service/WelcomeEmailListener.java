@@ -14,7 +14,13 @@ public class WelcomeEmailListener {
 
     @RabbitListener(queues = "welcomeQueue")
     public void receiveWelcomeMessage(Client client) {
-        System.out.println("Очередь welcomeQueue " +client.getName());
+        System.out.println("Очередь 1 welcomeQueue " +client.getName());
+        emailService.sendWelcomeEmail(client);
+
+    }
+    @RabbitListener(queues = "welcomeQueue")
+    public void receiveWelcomeMessage1(Client client) {
+        System.out.println("Очередь 2 welcomeQueue " +client.getEmail());
         emailService.sendWelcomeEmail(client);
 
     }
