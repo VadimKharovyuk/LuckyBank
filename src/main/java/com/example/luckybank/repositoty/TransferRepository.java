@@ -1,4 +1,4 @@
-package com.example.luckybank.Exception;
+package com.example.luckybank.repositoty;
 
 import com.example.luckybank.model.Transfer;
 import org.springframework.data.jpa.repository.JpaRepository;

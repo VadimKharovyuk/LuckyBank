@@ -14,12 +14,12 @@ public class EmailListener {
 
     @RabbitListener(queues = "emailQueue")
     public void processEmailQueue(EmailRequest emailRequest) {
-        System.out.println("Отработала первая emailQueue ");
+        System.out.println("Отработала первая emailQueue для розслыки  ");
         emailService.sendEmail(emailRequest.getTo(), emailRequest.getSubject(), emailRequest.getText());
     }
     @RabbitListener(queues = "emailQueue")
     public void processEmailQueue1(EmailRequest emailRequest) {
-        System.out.println("Отработала вторая emailQueue ");
+        System.out.println("Отработала вторая emailQueue для розслыки  ");
         emailService.sendEmail(emailRequest.getTo(), emailRequest.getSubject(), emailRequest.getText());
     }
 }

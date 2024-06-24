@@ -3,7 +3,6 @@ package com.example.luckybank.controller;
 import com.example.luckybank.Exception.InsufficientFundsException;
 import com.example.luckybank.model.Transfer;
 import com.example.luckybank.service.TransferService;
-import com.example.luckybank.сonfiguration.TransferSender;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class TransferController {
     private final TransferService transferService;
-    private final TransferSender transferSender;
+//    private final TransferSender transferSender;
 
     @GetMapping("/form")
     public String showTransferForm() {
@@ -47,7 +46,7 @@ public class TransferController {
 
         // Если перевод успешен, отправляем сообщение в RabbitMQ или выполняем другие действия
         if (transferredAmount > 0) {
-            transferSender.send(senderCardNumber, recipientCardNumber, transferredAmount);
+            transferService.sendTransactionMessage(senderCardNumber, recipientCardNumber, transferredAmount);
         } else {
             throw new InsufficientFundsException("Недостаточно средств на счете отправителя");
         }

@@ -1,11 +1,12 @@
 package com.example.luckybank.service;
-
 import com.example.luckybank.Exception.InsufficientFundsException;
-import com.example.luckybank.Exception.TransferRepository;
+import com.example.luckybank.pojo.TransferMessage;
+import com.example.luckybank.repositoty.TransferRepository;
 import com.example.luckybank.model.Card;
 import com.example.luckybank.model.Transfer;
-import jakarta.transaction.Transactional;
+import com.example.luckybank.сonfiguration.RabbitMQConfig;
 import lombok.AllArgsConstructor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.RedisConnectionFailureException;
@@ -17,15 +18,18 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class TransferService {
+    private final RabbitTemplate rabbitTemplate;
 
     private final CardService cardService;
     private final TransferRepository transferRepository;
     private final CacheManager cacheManager;
 
+
     public double transfer(String senderCardNumber, String recipientCardNumber, double amount) throws Throwable {
         // Получаем информацию о картах отправителя и получателя
         Card senderCard = cardService.getCardByNumber(senderCardNumber);
         Card recipientCard = cardService.getCardByNumber(recipientCardNumber);
+
 
         // Проверяем, достаточно ли средств у отправителя
         if (senderCard.getBalance() >= amount) {
@@ -52,6 +56,11 @@ public class TransferService {
         } else {
             throw new InsufficientFundsException("Недостаточно средств на счете отправителя");
         }
+
+    }
+    public void sendTransactionMessage(String senderCardNumber, String recipientCardNumber, double amount) {
+        TransferMessage transferMessage = new TransferMessage(senderCardNumber, recipientCardNumber, amount);
+        rabbitTemplate.convertAndSend(RabbitMQConfig.exchangeName, "", transferMessage);
     }
 
 //    @Cacheable(value = "transfers", key = "#cardNumber", unless = "#result == null")
