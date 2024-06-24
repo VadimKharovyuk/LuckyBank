@@ -4,6 +4,7 @@ import com.example.luckybank.Exception.InsufficientFundsException;
 import com.example.luckybank.Exception.TransferRepository;
 import com.example.luckybank.model.Card;
 import com.example.luckybank.model.Transfer;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -50,7 +51,8 @@ public class TransferService {
         }
     }
 
-    @Cacheable(value = "transfers", key = "#cardNumber")
+    @Cacheable(value = "transfers", key = "#cardNumber", unless = "#result == null")
+    @Transactional
     public List<Transfer> getTransfersByCardNumber(String cardNumber) {
         return transferRepository.findBySenderCard_CardNumberOrRecipientCard_CardNumber(cardNumber, cardNumber);
     }
