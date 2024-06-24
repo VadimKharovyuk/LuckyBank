@@ -1,5 +1,6 @@
 package com.example.luckybank.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,7 +29,7 @@ public class Client  implements Serializable {
     private String email;
 
 
-
+//    @JsonBackReference
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Card> cards;
 

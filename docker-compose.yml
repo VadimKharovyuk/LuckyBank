@@ -64,6 +64,10 @@
 #
 #volumes:
 #  db_data:
+
+
+
+
 version: '3.8'
 services:
   db:
@@ -74,13 +78,13 @@ services:
       POSTGRES_USER: luckybank
       POSTGRES_PASSWORD: password
       POSTGRES_DB: luckybank
-    volumes:
-      - db_data:/var/lib/postgresql/data
+
   rabbitmq:
     image: rabbitmq:management
     ports:
       - "5672:5672"
-      - "15672:15672"
+      - "15672:15672
+
   luckybank-app:
     build: .
     ports:
@@ -92,5 +96,8 @@ services:
       SPRING_RABBITMQ_HOST: rabbitmq
       SPRING_RABBITMQ_PORT: 5672
 
-volumes:
-  db_data:
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+

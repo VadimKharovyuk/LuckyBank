@@ -5,6 +5,7 @@ import com.example.luckybank.Exception.TransferRepository;
 import com.example.luckybank.model.Card;
 import com.example.luckybank.model.Transfer;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -49,7 +50,7 @@ public class TransferService {
         }
     }
 
-
+    @Cacheable(value = "transfers", key = "#cardNumber")
     public List<Transfer> getTransfersByCardNumber(String cardNumber) {
         return transferRepository.findBySenderCard_CardNumberOrRecipientCard_CardNumber(cardNumber, cardNumber);
     }
