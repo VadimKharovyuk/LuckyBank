@@ -1,35 +1,96 @@
+#version: '3.8'
+#
+#services:
+#  luckybank-app:
+#    build:
+#      context: .  # путь к Dockerfile (текущая директория)
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8091:8091"
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/luckybank
+#      SPRING_DATASOURCE_USERNAME: postgres
+#      SPRING_DATASOURCE_PASSWORD: 19111993
+#      SPRING_RABBITMQ_HOST: rabbitmq
+#    depends_on:
+#      - db
+#      - rabbitmq
+#
+#  db:
+#    image: postgres:latest
+#    ports:
+#      - "5432:5432"
+#    environment:
+#      POSTGRES_DB: luckybank
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: 19111993
+#
+#  rabbitmq:
+#    image: rabbitmq:3-management
+#    ports:
+#      - "5672:5672"
+#      - "15672:15672"
+#    environment:
+#      RABBITMQ_DEFAULT_USER: guest
+#      RABBITMQ_DEFAULT_PASS: guest
+
+#version: '3.8'
+#services:
+#  db:
+#    image: postgres
+#    ports:
+#      - "5432:5432"
+#    environment:
+#      POSTGRES_USER: luckybank
+#      POSTGRES_PASSWORD: password
+#      POSTGRES_DB: luckybank
+#    volumes:
+#      - db_data:/var/lib/postgresql/data
+#  rabbitmq:
+#    image: rabbitmq:management
+#    ports:
+#      - "5672:5672"
+#      - "15672:15672"
+#  luckybank-app:
+#    build: .
+#    ports:
+#      - "8092:8091"
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/luckybank
+#      SPRING_DATASOURCE_USERNAME: luckybank
+#      SPRING_DATASOURCE_PASSWORD: password
+#      SPRING_RABBITMQ_HOST: rabbitmq
+#      SPRING_RABBITMQ_PORT: 5672
+#
+#volumes:
+#  db_data:
 version: '3.8'
-
 services:
-  luckybank-app:
-    build:
-      context: .  # путь к Dockerfile (текущая директория)
-      dockerfile: Dockerfile
-    ports:
-      - "8091:8091"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/luckybank
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: 19111993
-      SPRING_RABBITMQ_HOST: rabbitmq
-    depends_on:
-      - db
-      - rabbitmq
-
   db:
-    image: postgres:latest
+    image: postgres
     ports:
       - "5432:5432"
     environment:
+      POSTGRES_USER: luckybank
+      POSTGRES_PASSWORD: password
       POSTGRES_DB: luckybank
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 19111993
-
+    volumes:
+      - db_data:/var/lib/postgresql/data
   rabbitmq:
-    image: rabbitmq:3-management
+    image: rabbitmq:management
     ports:
       - "5672:5672"
       - "15672:15672"
+  luckybank-app:
+    build: .
+    ports:
+      - "8092:8091"
     environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/luckybank
+      SPRING_DATASOURCE_USERNAME: luckybank
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+
+volumes:
+  db_data:
