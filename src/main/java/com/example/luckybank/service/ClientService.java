@@ -10,12 +10,24 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class ClientService {
     private final ClientRepository clientRepository;
     private final CardRepository cardRepository;
+
+
+
+
+    public List<Client> getAllClientsWithEmail() {
+        return clientRepository.findAll().stream()
+                .filter(client -> client.getEmail() != null && !client.getEmail().isEmpty())
+                .collect(Collectors.toList());
+    }
+
+
 
     public Client createClient(Client client) {
         // Добавьте здесь логику для создания клиента
@@ -41,6 +53,8 @@ public Optional<Client> getClientByName(String name) {
         return (Client) clientRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Клиент с id " + id + " не найден"));
     }
+
+
 
 
 

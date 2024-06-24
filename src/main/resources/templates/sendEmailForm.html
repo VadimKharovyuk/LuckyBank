@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Send Email to All Clients</title>
+</head>
+<body>
+<h1>Send Email to All Clients</h1>
+<form action="/email/sendToAll" method="post">
+    <label for="subject">Subject:</label><br>
+    <input type="text" id="subject" name="subject" required><br><br>
+    <label for="text">Message:</label><br>
+    <textarea id="text" name="text" rows="10" cols="30" required></textarea><br><br>
+    <input type="submit" value="Send Email">
+</form>
+</body>
+</html>

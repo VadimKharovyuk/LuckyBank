@@ -8,6 +8,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class EmailService {
@@ -37,6 +39,32 @@ public class EmailService {
         sendEmail(client.getEmail(), subject, text);
         // Отправляем сообщение в welcomeExchange
     }
+    public void sendMassEmail(String subject, String text, List<Client> clients) {
+        for (Client client : clients) {
+            sendEmail(client.getEmail(), subject, text);
+        }
+    }
+
+
+
+
+//public void sendMassEmail(String subject, List<Client> clients) {
+//    for (Client client : clients) {
+//        String text = "Уважаемый(ая) " + client.getName() + " " + client.getLastName() + ",\n\n" +
+//                "Мы хотим выразить нашу искреннюю благодарность за то, что вы выбрали наш банк и пользуетесь нашими услугами.\n" +
+//                "Для нас большая честь быть вашим финансовым партнёром.\n\n" +
+//                "В качестве благодарности мы рады предложить вам эксклюзивные скидки на наши услуги.\n" +
+//                "Пожалуйста, свяжитесь с нашей службой поддержки, чтобы узнать больше о доступных скидках и специальных предложениях.\n\n" +
+//                "С наилучшими пожеланиями,\n" +
+//                "Команда " + "Название вашего банка" + "\n" +
+//                "Телефон: +123456789\n" +
+//                "Email: info@examplebank.com";
+//
+//        sendEmail(client.getEmail(), subject, text);
+//    }
+//}
+
+
 
 }
 

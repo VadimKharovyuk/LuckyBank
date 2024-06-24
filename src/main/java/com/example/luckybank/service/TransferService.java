@@ -6,7 +6,9 @@ import com.example.luckybank.model.Card;
 import com.example.luckybank.model.Transfer;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -18,6 +20,7 @@ public class TransferService {
 
     private final CardService cardService;
     private final TransferRepository transferRepository;
+    private final CacheManager cacheManager;
 
     public double transfer(String senderCardNumber, String recipientCardNumber, double amount) throws Throwable {
         // Получаем информацию о картах отправителя и получателя
@@ -51,9 +54,23 @@ public class TransferService {
         }
     }
 
-    @Cacheable(value = "transfers", key = "#cardNumber", unless = "#result == null")
-    @Transactional
+//    @Cacheable(value = "transfers", key = "#cardNumber", unless = "#result == null")
+//    @Transactional
+//    public List<Transfer> getTransfersByCardNumber(String cardNumber) {
+//        return transferRepository.findBySenderCard_CardNumberOrRecipientCard_CardNumber(cardNumber, cardNumber);
+//    }
+
+    @Cacheable(value = "transfers", key = "#cardNumber")
     public List<Transfer> getTransfersByCardNumber(String cardNumber) {
-        return transferRepository.findBySenderCard_CardNumberOrRecipientCard_CardNumber(cardNumber, cardNumber);
+        try {
+            // Проверка соединения с Redis
+            cacheManager.getCache("transfers").get(cardNumber);
+            // Если соединение есть, возвращаем кэшированные данные
+            return transferRepository.findBySenderCard_CardNumberOrRecipientCard_CardNumber(cardNumber, cardNumber);
+        } catch (RedisConnectionFailureException ex) {
+            // Если соединения с Redis нет, возвращаем данные из базы данных
+            System.err.println("Redis connection failed, пошел в бд.");
+            return transferRepository.findBySenderCard_CardNumberOrRecipientCard_CardNumber(cardNumber, cardNumber);
+        }
     }
 }
