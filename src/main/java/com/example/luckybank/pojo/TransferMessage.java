@@ -1,4 +1,4 @@
-package com.example.luckybank.сonfiguration;
+package com.example.luckybank.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

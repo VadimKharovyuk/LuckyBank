@@ -1,6 +1,7 @@
 package com.example.luckybank.service;
 
 import com.example.luckybank.model.Client;
+import com.example.luckybank.pojo.EmailRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import java.util.List;
 public class EmailService {
 
     private  final  JavaMailSender mailSender;
+    private final RabbitTemplate rabbitTemplate;
 
 
     public void sendEmail(String to, String subject, String text) {
@@ -39,9 +41,12 @@ public class EmailService {
         sendEmail(client.getEmail(), subject, text);
         // Отправляем сообщение в welcomeExchange
     }
+
+
     public void sendMassEmail(String subject, String text, List<Client> clients) {
         for (Client client : clients) {
             sendEmail(client.getEmail(), subject, text);
+            rabbitTemplate.convertAndSend("emailQueue", new EmailRequest(client.getEmail(), subject, text));
         }
     }
 

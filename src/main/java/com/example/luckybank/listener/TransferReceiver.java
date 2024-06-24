@@ -1,4 +1,5 @@
-package com.example.luckybank.сonfiguration;
+package com.example.luckybank.listener;
+import com.example.luckybank.pojo.TransferMessage;
 import com.example.luckybank.service.TransferService;
 import lombok.AllArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

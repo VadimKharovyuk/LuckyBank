@@ -1,6 +1,7 @@
-package com.example.luckybank.service;
+package com.example.luckybank.listener;
 
 import com.example.luckybank.model.Client;
+import com.example.luckybank.service.EmailService;
 import lombok.AllArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

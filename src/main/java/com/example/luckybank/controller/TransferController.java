@@ -3,7 +3,6 @@ package com.example.luckybank.controller;
 import com.example.luckybank.Exception.InsufficientFundsException;
 import com.example.luckybank.model.Transfer;
 import com.example.luckybank.service.TransferService;
-import com.example.luckybank.сonfiguration.TransferMessage;
 import com.example.luckybank.сonfiguration.TransferSender;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
