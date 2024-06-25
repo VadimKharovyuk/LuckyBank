@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 public class TransferReceiver {
 
 
+
     @RabbitListener(queues = "transferQueue")
     public void receiveTransferMessage(TransferMessage transferMessage) {
 

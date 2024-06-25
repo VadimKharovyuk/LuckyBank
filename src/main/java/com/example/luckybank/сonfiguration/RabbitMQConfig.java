@@ -15,7 +15,31 @@ public class RabbitMQConfig {
     static final String transferQueueName = "transferQueue";
     public static final String exchangeName = "transferExchange";
     static final String welcomeQueueName = "welcomeQueue";
+
     static final String welcomeExchangeName = "welcomeExchange";
+
+
+
+
+
+    static final String emailQueueName = "emailQueue"; // Assuming you have one queue for emails
+
+    @Bean
+    Queue emailQueue() {
+        return new Queue(emailQueueName, false);
+    }
+
+    @Bean
+    FanoutExchange emailExchange() {
+        return new FanoutExchange("emailExchange");
+    }
+
+    @Bean
+    public Binding binding() {
+        return BindingBuilder.bind(emailQueue()).to(emailExchange());
+    }
+
+
 
 
 

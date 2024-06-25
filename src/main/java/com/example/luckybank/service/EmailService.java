@@ -43,12 +43,19 @@ public class EmailService {
     }
 
 
-    public void sendMassEmail(String subject, String text, List<Client> clients) {
-        for (Client client : clients) {
-            sendEmail(client.getEmail(), subject, text);
-            rabbitTemplate.convertAndSend("emailQueue", new EmailRequest(client.getEmail(), subject, text));
-        }
+//    public void sendMassEmail(String subject, String text, List<Client> clients) {
+//        for (Client client : clients) {
+//            sendEmail(client.getEmail(), subject, text);
+//            rabbitTemplate.convertAndSend("emailQueue", new EmailRequest(client.getEmail(), subject, text));
+//
+//        }
+//    }
+public void sendMassEmail(String subject, String text, List<Client> clients) {
+    for (Client client : clients) {
+        sendEmail(client.getEmail(), subject, text);
+        rabbitTemplate.convertAndSend("emailExchange", "", new EmailRequest(client.getEmail(), subject, text));
     }
+}
 
 
 

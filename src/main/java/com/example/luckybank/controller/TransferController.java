@@ -14,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 public class TransferController {
     private final TransferService transferService;
-//    private final TransferSender transferSender;
 
     @GetMapping("/form")
     public String showTransferForm() {
@@ -41,10 +40,8 @@ public class TransferController {
     public String transferFunds(@RequestParam("senderCardNumber") String senderCardNumber,
                                 @RequestParam("recipientCardNumber") String recipientCardNumber,
                                 @RequestParam("amount") double amount) throws Throwable {
-        // Вызываем метод transfer из TransferService
         double transferredAmount = transferService.transfer(senderCardNumber, recipientCardNumber, amount);
 
-        // Если перевод успешен, отправляем сообщение в RabbitMQ или выполняем другие действия
         if (transferredAmount > 0) {
             transferService.sendTransactionMessage(senderCardNumber, recipientCardNumber, transferredAmount);
         } else {
