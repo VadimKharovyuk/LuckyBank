@@ -1,4 +1,31 @@
 
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>Данные карты</title>-->
+<!--    <meta charset="UTF-8">-->
+<!--    &lt;!&ndash; Подключение Bootstrap CSS &ndash;&gt;-->
+<!--    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container">-->
+<!--    <h1 class="mt-5">Введите данные карты</h1>-->
+<!--    <form action="/history" method="post" class="mt-4">-->
+<!--        <div class="form-group">-->
+<!--            <label for="cardNumber">Номер карты:</label>-->
+<!--            <input type="text" id="cardNumber" name="cardNumber" class="form-control" required>-->
+<!--        </div>-->
+<!--        <button type="submit" class="btn btn-primary mt-3">Получить историю переводов</button>-->
+<!--    </form>-->
+<!--</div>-->
+<!--&lt;!&ndash; Подключение Bootstrap JS и зависимостей &ndash;&gt;-->
+<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>-->
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
+<!--</body>-->
+<!--</html>-->
+
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -6,9 +33,35 @@
     <meta charset="UTF-8">
     <!-- Подключение Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        #current-time {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.2em;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
+<!-- Навигация -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="#">Lucky Bank</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="/">Главная страница</a></li>
+            <li class="nav-item"><a class="nav-link" href="/register">Зарегистрироваться</a></li>
+            <li class="nav-item"><a class="nav-link" href="/cards/create">Создать новую карту</a></li>
+            <li class="nav-item"><a class="nav-link" href="/cards">Лист карт</a></li>
+            <li class="nav-item"><a class="nav-link" href="/sendmoney">Перевод денег</a></li>
+            <li class="nav-item"><a class="nav-link" href="/total-balance">Общий баланс</a></li>
+            <li class="nav-item"><a class="nav-link" href="/clients">Клиенты Банка</a></li>
+        </ul>
+    </div>
+    <div id="current-time"></div>
+</nav>
+
+<div class="container mt-5">
     <h1 class="mt-5">Введите данные карты</h1>
     <form action="/history" method="post" class="mt-4">
         <div class="form-group">
@@ -18,9 +71,21 @@
         <button type="submit" class="btn btn-primary mt-3">Получить историю переводов</button>
     </form>
 </div>
+
 <!-- Подключение Bootstrap JS и зависимостей -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!-- Скрипт для отображения текущего времени -->
+<script>
+    function updateTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString();
+        document.getElementById('current-time').textContent = timeString;
+    }
+    setInterval(updateTime, 1000);
+    updateTime(); // начальная установка времени
+</script>
 </body>
 </html>

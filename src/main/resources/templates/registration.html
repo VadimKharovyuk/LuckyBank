@@ -1,121 +1,213 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Регистрация клиента</title>-->
+<!--    <style>-->
+<!--        /* Стили для навигационного меню */-->
+<!--        nav {-->
+<!--            background-color: #0a0a0a;-->
+<!--            padding: 10px;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        ul {-->
+<!--            list-style-type: none;-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--        }-->
+
+<!--        li {-->
+<!--            display: inline;-->
+<!--            margin-right: 20px;-->
+<!--        }-->
+
+<!--        a {-->
+<!--            color: #f3eaea;-->
+<!--            text-decoration: none;-->
+<!--            font-weight: bold;-->
+<!--        }-->
+
+<!--        /* Стили для содержимого страницы */-->
+<!--        body {-->
+<!--            text-align: center;-->
+<!--            margin-top: 50px;-->
+<!--        }-->
+
+<!--        h1 {-->
+<!--            color: #0a0a0a;-->
+<!--        }-->
+
+<!--        form {-->
+<!--            margin-top: 20px;-->
+<!--            text-align: left;-->
+<!--            display: inline-block;-->
+<!--        }-->
+
+<!--        label {-->
+<!--            display: block;-->
+<!--            margin-bottom: 5px;-->
+<!--        }-->
+
+<!--        input[type="text"],-->
+<!--        input[type="email"] {-->
+<!--            width: 300px;-->
+<!--            padding: 8px;-->
+<!--            margin-bottom: 10px;-->
+<!--            border: 1px solid #ccc;-->
+<!--            border-radius: 4px;-->
+<!--            box-sizing: border-box;-->
+<!--        }-->
+
+<!--        input[type="submit"] {-->
+<!--            background-color: #4CAF50;-->
+<!--            color: white;-->
+<!--            padding: 10px 20px;-->
+<!--            border: none;-->
+<!--            border-radius: 4px;-->
+<!--            cursor: pointer;-->
+<!--        }-->
+
+<!--        input[type="submit"]:hover {-->
+<!--            background-color: #45a049;-->
+<!--        }-->
+
+<!--        /* Кнопка для перехода на главную страницу */-->
+<!--        a.back-link {-->
+<!--            display: block;-->
+<!--            margin-top: 20px;-->
+<!--            color: #4CAF50;-->
+<!--            font-weight: bold;-->
+<!--            text-decoration: none;-->
+<!--        }-->
+
+<!--        a.back-link:hover {-->
+<!--            text-decoration: underline;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<nav>-->
+<!--    <ul>-->
+<!--        <li><a href="/">Главная страница</a></li>-->
+<!--        <li><a href="/cards">Список всех карточек</a></li>-->
+<!--        <li><a href="/sendmoney">Перевод денег</a></li>-->
+<!--        <li><a href="/clients">Баланс Клиентов </a></li>-->
+<!--        <li><a href="/total-balance">Общий баланс Lucky Bank </a></li>-->
+<!--    </ul>-->
+<!--</nav>-->
+<!--<body>-->
+
+<!--<h1>Регистрация нового клиента</h1>-->
+<!--<form action="/register" method="post">-->
+<!--    <label for="name">Имя:</label>-->
+<!--    <input type="text" id="name" name="name" required><br><br>-->
+
+<!--    <label for="lastName">Фамилия:</label>-->
+<!--    <input type="text" id="lastName" name="lastName" required><br><br>-->
+
+<!--    <label for="address">Адрес:</label>-->
+<!--    <input type="text" id="address" name="address" required><br><br>-->
+
+<!--    <label for="email">Email:</label>-->
+<!--    <input type="email" id="email" name="email" required><br><br>-->
+
+<!--    <input type="submit" value="Зарегистрировать">-->
+<!--</form>-->
+
+<!--&lt;!&ndash; Кнопка для перехода на главную страницу &ndash;&gt;-->
+<!--<a href="/" class="back-link">На главную страницу</a>-->
+<!--<a href="/cards/create" class="back-link">Оформить карту банка</a>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Регистрация клиента</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация нового клиента</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
-        /* Стили для навигационного меню */
-        nav {
-            background-color: #0a0a0a;
-            padding: 10px;
-            text-align: center;
-        }
-
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        li {
-            display: inline;
-            margin-right: 20px;
-        }
-
-        a {
-            color: #f3eaea;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        /* Стили для содержимого страницы */
         body {
-            text-align: center;
-            margin-top: 50px;
+            padding-top: 70px; /* Отступ сверху для фиксации навигации */
         }
-
-        h1 {
-            color: #0a0a0a;
+        .navbar {
+            background-color: #f8f9fa; /* Светлый фон для навигации */
         }
-
-        form {
-            margin-top: 20px;
-            text-align: left;
-            display: inline-block;
+        .back-link {
+            margin-right: 15px;
         }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input[type="text"],
-        input[type="email"] {
-            width: 300px;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-
-        /* Кнопка для перехода на главную страницу */
-        a.back-link {
-            display: block;
-            margin-top: 20px;
-            color: #4CAF50;
-            font-weight: bold;
-            text-decoration: none;
-        }
-
-        a.back-link:hover {
-            text-decoration: underline;
+        #current-time {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.2em;
         }
     </style>
 </head>
-<nav>
-    <ul>
-        <li><a href="/">Главная страница</a></li>
-        <li><a href="/cards">Список всех карточек</a></li>
-        <li><a href="/sendmoney">Перевод денег</a></li>
-        <li><a href="/clients">Баланс Клиентов </a></li>
-        <li><a href="/total-balance">Общий баланс Lucky Bank </a></li>
-    </ul>
-</nav>
 <body>
+<!-- Навигация -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <a class="navbar-brand" href="/">Lucky Bank</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="/">Главная страница</a></li>
+            <li class="nav-item"><a class="nav-link" href="/cards">Список всех карточек</a></li>
+            <li class="nav-item"><a class="nav-link" href="/sendmoney">Перевод денег</a></li>
+            <li class="nav-item"><a class="nav-link" href="/clients">Баланс Клиентов</a></li>
+            <li class="nav-item"><a class="nav-link" href="/total-balance">Общий баланс Lucky Bank</a></li>
+        </ul>
+    </div>
+    <div id="current-time"></div>
+</nav>
 
-<h1>Регистрация нового клиента</h1>
-<form action="/register" method="post">
-    <label for="name">Имя:</label>
-    <input type="text" id="name" name="name" required><br><br>
+<!-- Контент страницы -->
+<div class="container">
+    <h1>Регистрация нового клиента</h1>
+    <form action="/register" method="post">
+        <div class="form-group">
+            <label for="name">Имя:</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Фамилия:</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" required>
+        </div>
+        <div class="form-group">
+            <label for="address">Адрес:</label>
+            <input type="text" class="form-control" id="address" name="address" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Зарегистрировать</button>
+    </form>
 
-    <label for="lastName">Фамилия:</label>
-    <input type="text" id="lastName" name="lastName" required><br><br>
+    <!-- Кнопки для перехода -->
+    <a href="/" class="btn btn-secondary mt-3">На главную страницу</a>
+    <a href="/cards/create" class="btn btn-secondary mt-3">Оформить карту банка</a>
+</div>
 
-    <label for="address">Адрес:</label>
-    <input type="text" id="address" name="address" required><br><br>
+<!-- Bootstrap JS и зависимости -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required><br><br>
-
-    <input type="submit" value="Зарегистрировать">
-</form>
-
-<!-- Кнопка для перехода на главную страницу -->
-<a href="/" class="back-link">На главную страницу</a>
-<a href="/cards/create" class="back-link">Оформить карту банка</a>
+<!-- Скрипт для отображения текущего времени -->
+<script>
+    function updateTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString();
+        document.getElementById('current-time').textContent = timeString;
+    }
+    setInterval(updateTime, 1000);
+    updateTime(); // начальная установка времени
+</script>
 </body>
 </html>

@@ -1,100 +1,184 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Перевод средств</title>-->
+<!--    <style>-->
+<!--        /* Стили для навигационного меню */-->
+<!--        nav {-->
+<!--            background-color: #0a0a0a;-->
+<!--            padding: 10px;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        ul {-->
+<!--            list-style-type: none;-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--        }-->
+
+<!--        li {-->
+<!--            display: inline;-->
+<!--            margin-right: 20px;-->
+<!--        }-->
+
+<!--        a {-->
+<!--            color: #eae5e5;-->
+<!--            text-decoration: none;-->
+<!--            font-weight: bold;-->
+<!--        }-->
+
+<!--        /* Стили для содержимого страницы */-->
+<!--        body {-->
+<!--            text-align: center;-->
+<!--            margin-top: 50px;-->
+<!--        }-->
+
+<!--        h1 {-->
+<!--            color: #0a0a0a;-->
+<!--        }-->
+
+<!--        form {-->
+<!--            margin-top: 20px;-->
+<!--            text-align: left;-->
+<!--            display: inline-block;-->
+<!--        }-->
+
+<!--        label {-->
+<!--            display: block;-->
+<!--            margin-bottom: 5px;-->
+<!--        }-->
+
+<!--        input[type="text"],-->
+<!--        input[type="number"] {-->
+<!--            width: 300px;-->
+<!--            padding: 8px;-->
+<!--            margin-bottom: 10px;-->
+<!--            border: 1px solid #ccc;-->
+<!--            border-radius: 4px;-->
+<!--            box-sizing: border-box;-->
+<!--        }-->
+
+<!--        input[type="submit"] {-->
+<!--            background-color: #4CAF50;-->
+<!--            color: white;-->
+<!--            padding: 10px 20px;-->
+<!--            border: none;-->
+<!--            border-radius: 4px;-->
+<!--            cursor: pointer;-->
+<!--        }-->
+
+<!--        input[type="submit"]:hover {-->
+<!--            background-color: #45a049;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<nav>-->
+<!--    <ul>-->
+<!--        <li><a href="/">Главная страница</a></li>-->
+<!--        <li><a href="/cards">Список всех карточек</a></li>-->
+<!--        <li><a href="/sendmoney">Перевод денег</a></li>-->
+<!--        <li><a href="/clients">Баланс Клиентов </a></li>-->
+<!--        <li> <a href="/form">История переводов</a></li>-->
+<!--    </ul>-->
+<!--</nav>-->
+<!--<h1>Перевод средств</h1>-->
+<!--<form action="/transfer" method="post">-->
+<!--    <label for="senderCardNumber">Номер карты отправителя:</label>-->
+<!--    <input type="text" id="senderCardNumber" name="senderCardNumber" required><br><br>-->
+
+<!--    <label for="recipientCardNumber">Номер карты получателя:</label>-->
+<!--    <input type="text" id="recipientCardNumber" name="recipientCardNumber" required><br><br>-->
+
+<!--    <label for="amount">Сумма перевода:</label>-->
+<!--    <input type="number" id="amount" name="amount" required><br><br>-->
+
+<!--    <input type="submit" value="Перевести">-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Перевод средств</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
-        /* Стили для навигационного меню */
-        nav {
-            background-color: #0a0a0a;
-            padding: 10px;
-            text-align: center;
-        }
-
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        li {
-            display: inline;
-            margin-right: 20px;
-        }
-
-        a {
-            color: #eae5e5;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        /* Стили для содержимого страницы */
         body {
-            text-align: center;
-            margin-top: 50px;
+            padding-top: 70px; /* Отступ сверху для фиксации навигации */
         }
-
-        h1 {
-            color: #0a0a0a;
+        .navbar {
+            background-color: #f8f9fa; /* Светлый фон для навигации */
         }
-
-        form {
-            margin-top: 20px;
-            text-align: left;
-            display: inline-block;
+        .back-link {
+            margin-right: 15px;
         }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input[type="text"],
-        input[type="number"] {
-            width: 300px;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #45a049;
+        #current-time {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.2em;
         }
     </style>
 </head>
 <body>
-<nav>
-    <ul>
-        <li><a href="/">Главная страница</a></li>
-        <li><a href="/cards">Список всех карточек</a></li>
-        <li><a href="/sendmoney">Перевод денег</a></li>
-        <li><a href="/clients">Баланс Клиентов </a></li>
-        <li> <a href="/form">История переводов</a></li>
-    </ul>
+<!-- Навигация -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <a class="navbar-brand" href="/">Lucky Bank</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="/">Главная страница</a></li>
+            <li class="nav-item"><a class="nav-link" href="/cards">Список всех карточек</a></li>
+            <li class="nav-item"><a class="nav-link" href="/sendmoney">Перевод денег</a></li>
+            <li class="nav-item"><a class="nav-link" href="/clients">Баланс Клиентов</a></li>
+            <li class="nav-item"><a class="nav-link" href="/form">История переводов</a></li>
+        </ul>
+    </div>
+    <div id="current-time"></div>
 </nav>
-<h1>Перевод средств</h1>
-<form action="/transfer" method="post">
-    <label for="senderCardNumber">Номер карты отправителя:</label>
-    <input type="text" id="senderCardNumber" name="senderCardNumber" required><br><br>
 
-    <label for="recipientCardNumber">Номер карты получателя:</label>
-    <input type="text" id="recipientCardNumber" name="recipientCardNumber" required><br><br>
+<!-- Контент страницы -->
+<div class="container">
+    <h1>Перевод средств</h1>
+    <form action="/transfer" method="post">
+        <div class="form-group">
+            <label for="senderCardNumber">Номер карты отправителя:</label>
+            <input type="text" class="form-control" id="senderCardNumber" name="senderCardNumber" required>
+        </div>
+        <div class="form-group">
+            <label for="recipientCardNumber">Номер карты получателя:</label>
+            <input type="text" class="form-control" id="recipientCardNumber" name="recipientCardNumber" required>
+        </div>
+        <div class="form-group">
+            <label for="amount">Сумма перевода:</label>
+            <input type="number" class="form-control" id="amount" name="amount" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Перевести</button>
+    </form>
+</div>
 
-    <label for="amount">Сумма перевода:</label>
-    <input type="number" id="amount" name="amount" required><br><br>
+<!-- Bootstrap JS и зависимости -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <input type="submit" value="Перевести">
-</form>
+<!-- Скрипт для отображения текущего времени -->
+<script>
+    function updateTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString();
+        document.getElementById('current-time').textContent = timeString;
+    }
+    setInterval(updateTime, 1000);
+    updateTime(); // начальная установка времени
+</script>
 </body>
 </html>
