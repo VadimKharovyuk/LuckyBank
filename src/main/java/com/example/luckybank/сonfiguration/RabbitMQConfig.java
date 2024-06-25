@@ -17,12 +17,8 @@ public class RabbitMQConfig {
     static final String welcomeQueueName = "welcomeQueue";
 
     static final String welcomeExchangeName = "welcomeExchange";
+    static final String emailQueueName = "emailQueue";
 
-
-
-
-
-    static final String emailQueueName = "emailQueue"; // Assuming you have one queue for emails
 
     @Bean
     Queue emailQueue() {

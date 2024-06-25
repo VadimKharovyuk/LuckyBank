@@ -12,7 +12,7 @@ public class BankController {
     private final ClientService clientService;
     @GetMapping("/")
     public String mainPage(Model model) {
-        // Добавим общую информацию о банке в модель
+
         model.addAttribute("pageTitle", "Добро пожаловать в Lucky Bank!");
         model.addAttribute("welcomeMessage", "Добро пожаловать в наш банк. Здесь вы можете отправлять и получать деньги, управлять своими карточками и многое другое.");
         return "main"; // Возвращает имя шаблона представления

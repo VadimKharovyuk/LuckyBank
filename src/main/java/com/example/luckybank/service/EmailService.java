@@ -39,17 +39,9 @@ public class EmailService {
                 "Email: info@examplebank.com";
 
         sendEmail(client.getEmail(), subject, text);
-        // Отправляем сообщение в welcomeExchange
     }
 
 
-//    public void sendMassEmail(String subject, String text, List<Client> clients) {
-//        for (Client client : clients) {
-//            sendEmail(client.getEmail(), subject, text);
-//            rabbitTemplate.convertAndSend("emailQueue", new EmailRequest(client.getEmail(), subject, text));
-//
-//        }
-//    }
 public void sendMassEmail(String subject, String text, List<Client> clients) {
     for (Client client : clients) {
         sendEmail(client.getEmail(), subject, text);

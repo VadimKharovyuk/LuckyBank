@@ -40,14 +40,5 @@ public class EmailListener {
         emailService.sendEmail(emailRequest.getTo(), emailRequest.getSubject(), emailRequest.getText());
     }
 
-    @RabbitListener(queues = "emailQueue1")
-    public void processEmailQueue2(EmailRequest emailRequest) {
-        System.out.println("Отработала вторая emailQueue для рассылки");
-        emailService.sendEmail(emailRequest.getTo(), emailRequest.getSubject(), emailRequest.getText());
-    }
-
-
-
-
 }
 

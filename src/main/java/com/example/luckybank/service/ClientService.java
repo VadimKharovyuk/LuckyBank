@@ -30,7 +30,6 @@ public class ClientService {
 
 
     public Client createClient(Client client) {
-        // Добавьте здесь логику для создания клиента
         return clientRepository.save(client);
     }
 
