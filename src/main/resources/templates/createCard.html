@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,22 +9,60 @@
     <style>
         body {
             padding: 20px;
+            background-image: url("/cardCreate.webp");
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
         }
 
-        form {
+        .form-container {
             width: 50%;
-            margin: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
         }
 
         .alert {
             margin-top: 20px;
             text-align: center;
         }
+
+        .header-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header-container h1 {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
     </style>
 </head>
 <body>
-<div class="container">
-    <h1 class="mt-4">Создать карту</h1>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="/">Lucky Bank</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="/">Главная страница</a></li>
+            <li class="nav-item"><a class="nav-link" href="/cards">Список всех карточек</a></li>
+            <li class="nav-item"><a class="nav-link" href="/sendmoney">Перевод денег</a></li>
+            <li class="nav-item"><a class="nav-link" href="/clients">Баланс Клиентов</a></li>
+            <li class="nav-item"><a class="nav-link" href="/form">История переводов</a></li>
+        </ul>
+    </div>
+    <div id="current-time" class="text-dark"></div>
+</nav>
+
+<div class="header-container">
+    <h1>Создать карту</h1>
+</div>
+
+<div class="form-container">
     <form action="#" th:action="@{/cards/createcard}" method="post" class="mt-4">
         <div class="form-group">
             <label for="clientName">Имя клиента:</label>
@@ -46,5 +84,16 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Скрипт для отображения текущего времени -->
+<script>
+    function updateTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString();
+        document.getElementById('current-time').textContent = timeString;
+    }
+    setInterval(updateTime, 1000);
+    updateTime(); // начальная установка времени
+</script>
 </body>
 </html>
