@@ -1,162 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Lucky Bank</title>-->
-<!--    &lt;!&ndash; Bootstrap CSS &ndash;&gt;-->
-<!--    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">-->
-<!--    &lt;!&ndash; Bootstrap JS, Popper.js, and jQuery &ndash;&gt;-->
-<!--    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>-->
-<!--    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>-->
-<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
-<!--    <style>-->
-<!--        nav {-->
-<!--            background-color: #0a0a0a;-->
-<!--            padding: 10px;-->
-<!--        }-->
-
-<!--        nav .navbar-nav .nav-link {-->
-<!--            color: #f3eaea;-->
-<!--            font-weight: bold;-->
-<!--        }-->
-
-<!--        header {-->
-<!--            background-color: #1414d9;-->
-<!--            padding: 40px 0;-->
-<!--            text-align: center;-->
-<!--            color: white;-->
-<!--            margin-bottom: 30px;-->
-
-<!--        }-->
-
-<!--        .services {-->
-<!--            margin-top: 20px;-->
-<!--            text-align: center;-->
-<!--        }-->
-
-<!--        .services .card {-->
-<!--            margin: 20px 0;-->
-<!--        }-->
-
-<!--        .footer {-->
-<!--            background-color: #0a0a0a;-->
-<!--            color: white;-->
-<!--            padding: 20px 0;-->
-<!--            text-align: center;-->
-<!--        }-->
-<!--    </style>-->
-<!--</head>-->
-<!--<body>-->
-<!--<nav class="navbar navbar-expand-lg navbar-dark bg-dark">-->
-<!--    <div class="container">-->
-<!--        <a class="navbar-brand" href="/">Lucky Bank</a>-->
-<!--        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"-->
-<!--                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--            <span class="navbar-toggler-icon"></span>-->
-<!--        </button>-->
-<!--        <div class="collapse navbar-collapse" id="navbarNav">-->
-<!--            <ul class="navbar-nav ml-auto">-->
-<!--                <li class="nav-item active">-->
-<!--                    <a class="nav-link" href="/">Главная страница</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="/cards">Список всех карточек</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="/sendmoney">Перевод денег</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="/clients">Баланс Клиентов</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="/total-balance">Общий баланс Lucky Bank</a>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</nav>-->
-
-<!--<header>-->
-<!--    <div class="container">-->
-<!--        <h1>Добро пожаловать в Lucky Bank!</h1>-->
-<!--        <p>Ваш надежный партнер в финансовых услугах</p>-->
-<!--    </div>-->
-<!--</header>-->
-
-<!--<div class="container services">-->
-<!--    <h2 class="mb-4">Услуги Lucky Bank:</h2>-->
-<!--    <div class="row">-->
-<!--        <div class="col-md-4">-->
-<!--            <div class="card">-->
-<!--                <div class="card-body">-->
-<!--                    <h5 class="card-title">Перевод денег</h5>-->
-<!--                    <p class="card-text">Быстрые и безопасные переводы денег на любые счета.</p>-->
-<!--                    <a href="/sendmoney" class="btn btn-primary">Подробнее</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="col-md-4">-->
-<!--            <div class="card">-->
-<!--                <div class="card-body">-->
-<!--                    <h5 class="card-title">Зарегистрироваться</h5>-->
-<!--                    <p class="card-text">Присоединяйтесь к Lucky Bank и получите доступ ко всем нашим услугам.</p>-->
-<!--                    <a href="/register" class="btn btn-secondary">Подробнее</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="col-md-4">-->
-<!--            <div class="card">-->
-<!--                <div class="card-body">-->
-<!--                    <h5 class="card-title">Создать новую карту</h5>-->
-<!--                    <p class="card-text">Оформите новую карту и начните пользоваться нашими преимуществами уже сегодня.</p>-->
-<!--                    <a href="/cards/create" class="btn btn-info">Подробнее</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="col-md-4">-->
-<!--            <div class="card">-->
-<!--                <div class="card-body">-->
-<!--                    <h5 class="card-title">Bancomat</h5>-->
-<!--                    <p class="card-text">Используйте наши банкоматы для снятия наличных и других операций.</p>-->
-<!--                    <a href="/bankomat" class="btn btn-warning">Подробнее</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class="col-md-4">-->
-<!--            <div class="card">-->
-<!--                <div class="card-body">-->
-<!--                    <h5 class="card-title">История переводов</h5>-->
-<!--                    <p class="card-text">Просмотрите историю всех ваших переводов и операций.</p>-->
-<!--                    <a href="/form" class="btn btn-dark">Подробнее</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class="col-md-4">-->
-<!--            <div class="card">-->
-<!--                <div class="card-body">-->
-<!--                    <h5 class="card-title">Отправить Email </h5>-->
-<!--                    <p class="card-text">Просмотрите историю всех ваших переводов и операций.</p>-->
-<!--                    <a href="/email/sendToAllForm" class="btn btn-dark">Подробнее</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-
-
-<!--    </div>-->
-<!--</div>-->
-
-<!--<footer class="footer">-->
-<!--    <div class="container">-->
-<!--        <p>&copy; 2024 Lucky Bank. Все права защищены.</p>-->
-<!--    </div>-->
-<!--</footer>-->
-
-<!--</body>-->
-<!--</html>-->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -314,6 +155,17 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Курс валют </h5>
+                    <p class="card-text"> курс валют </p>
+                    <a href="/exchange" class="btn btn-dark">Курс валют</a>
+                </div>
+            </div>
+        </div>
+
 
         <div class="col-md-4">
             <div class="card">

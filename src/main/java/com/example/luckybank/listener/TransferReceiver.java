@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class TransferReceiver {
 
-
-
     @RabbitListener(queues = "transferQueue")
     public void receiveTransferMessage(TransferMessage transferMessage) {
 

@@ -63,11 +63,6 @@ public class TransferService {
         rabbitTemplate.convertAndSend(RabbitMQConfig.exchangeName, "", transferMessage);
     }
 
-//    @Cacheable(value = "transfers", key = "#cardNumber", unless = "#result == null")
-//    @Transactional
-//    public List<Transfer> getTransfersByCardNumber(String cardNumber) {
-//        return transferRepository.findBySenderCard_CardNumberOrRecipientCard_CardNumber(cardNumber, cardNumber);
-//    }
 
     @Cacheable(value = "transfers", key = "#cardNumber")
     public List<Transfer> getTransfersByCardNumber(String cardNumber) {

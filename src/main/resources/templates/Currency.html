@@ -1,0 +1,170 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Currency Rates</title>-->
+<!--    <style>-->
+<!--        table {-->
+<!--            width: 100%;-->
+<!--            border-collapse: collapse;-->
+<!--        }-->
+<!--        th, td {-->
+<!--            border: 1px solid black;-->
+<!--            padding: 8px;-->
+<!--            text-align: left;-->
+<!--        }-->
+<!--        .search-container {-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Currency Rates</h1>-->
+<!--<div class="search-container">-->
+<!--    <label for="currency-select">Select Currency:</label>-->
+<!--    <select id="currency-select" multiple>-->
+<!--        <option value="UAH">UAH</option>-->
+<!--        <option value="TRY">Turkish Lira</option>-->
+<!--        <option value="RUB">Russian Ruble</option>-->
+<!--        <option value="CNY">Chinese Yuan</option>-->
+<!--        &lt;!&ndash; Add other currencies as needed &ndash;&gt;-->
+<!--    </select>-->
+<!--    <button id="search-btn">Search</button>-->
+<!--</div>-->
+<!--<table id="currency-table">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>Currency</th>-->
+<!--        <th>Rate</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    &lt;!&ndash; Data will be inserted here &ndash;&gt;-->
+<!--    </tbody>-->
+<!--</table>-->
+<!--<script>-->
+<!--    document.addEventListener("DOMContentLoaded", function() {-->
+<!--        const searchButton = document.querySelector('#search-btn');-->
+<!--        searchButton.addEventListener('click', function() {-->
+<!--            const selectedOptions = document.querySelector('#currency-select').selectedOptions;-->
+<!--            const currencies = Array.from(selectedOptions).map(option => option.value);-->
+
+<!--            if (currencies.length > 0) {-->
+<!--                fetch(`/api/currency/rates?currencies=${currencies.join(',')}`)-->
+<!--                    .then(response => response.json())-->
+<!--                    .then(data => {-->
+<!--                        const tableBody = document.querySelector('#currency-table tbody');-->
+<!--                        tableBody.innerHTML = ''; // Clear existing data-->
+
+<!--                        Object.entries(data.rates).forEach(([currency, rate]) => {-->
+<!--                            const row = document.createElement('tr');-->
+<!--                            row.innerHTML = `<td>${currency}</td><td>${rate}</td>`;-->
+<!--                            tableBody.appendChild(row);-->
+<!--                        });-->
+<!--                    })-->
+<!--                    .catch(error => {-->
+<!--                        console.error('Error fetching exchange rates:', error);-->
+<!--                    });-->
+<!--            } else {-->
+<!--                alert('Please select at least one currency.');-->
+<!--            }-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Rates</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        .search-container {
+            margin-bottom: 20px;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1>Currency Rates</h1>
+<div class="search-container">
+    <label for="currency-select">Select Currency:</label>
+    <select id="currency-select" multiple>
+        <option value="UAH">UAH</option>
+        <option value="TRY">Turkish Lira</option>
+        <option value="RUB">Russian Ruble</option>
+        <option value="CNY">Chinese Yuan</option>
+        <!-- Add other currencies as needed -->
+    </select>
+    <button id="search-btn">Search Selected Currencies</button>
+</div>
+<div class="button-container">
+    <button id="show-all-btn">Show All Currencies</button>
+</div>
+<table id="currency-table">
+    <thead>
+    <tr>
+        <th>Currency</th>
+        <th>Rate</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Data will be inserted here -->
+    </tbody>
+</table>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchButton = document.querySelector('#search-btn');
+        const showAllButton = document.querySelector('#show-all-btn');
+        const tableBody = document.querySelector('#currency-table tbody');
+
+        function updateTable(data) {
+            tableBody.innerHTML = ''; // Clear existing data
+            Object.entries(data.rates).forEach(([currency, rate]) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${currency}</td><td>${rate}</td>`;
+                tableBody.appendChild(row);
+            });
+        }
+
+        searchButton.addEventListener('click', function() {
+            const selectedOptions = document.querySelector('#currency-select').selectedOptions;
+            const currencies = Array.from(selectedOptions).map(option => option.value);
+
+            if (currencies.length > 0) {
+                fetch(`/api/currency/rates?currencies=${currencies.join(',')}`)
+                    .then(response => response.json())
+                    .then(data => updateTable(data))
+                    .catch(error => {
+                        console.error('Error fetching exchange rates:', error);
+                    });
+            } else {
+                alert('Please select at least one currency.');
+            }
+        });
+
+        showAllButton.addEventListener('click', function() {
+            fetch(`/api/currency/rates`)
+                .then(response => response.json())
+                .then(data => updateTable(data))
+                .catch(error => {
+                    console.error('Error fetching exchange rates:', error);
+                });
+        });
+    });
+</script>
+</body>
+</html>

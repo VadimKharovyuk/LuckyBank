@@ -17,4 +17,9 @@ public class BankController {
         model.addAttribute("welcomeMessage", "Добро пожаловать в наш банк. Здесь вы можете отправлять и получать деньги, управлять своими карточками и многое другое.");
         return "main"; // Возвращает имя шаблона представления
     }
+    @GetMapping("/exchange")
+    public String exchange(){
+        return "Currency";
+    }
+
 }
