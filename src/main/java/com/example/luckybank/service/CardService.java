@@ -114,6 +114,16 @@ public class CardService {
     }
 
 
+
+
+    public void withdraw(Long cardId, double amount) throws CardNotFoundException {
+        Card card = cardRepository.findById(cardId).orElseThrow(() -> new CardNotFoundException("Card not found"));
+        if (card.getBalance() < amount) {
+            throw new InsufficientFundsException("Insufficient funds");
+        }
+        card.setBalance(card.getBalance() - amount);
+        cardRepository.save(card);
+    }
 }
 
 

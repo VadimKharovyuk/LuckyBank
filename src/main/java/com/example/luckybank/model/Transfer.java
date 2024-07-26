@@ -15,19 +15,16 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Transfer  implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private Long id;
     @ManyToOne
     @JoinColumn(name = "sender_card_id")
     private Card senderCard;
-
     @ManyToOne
     @JoinColumn(name = "recipient_card_id")
     private Card recipientCard;
-
     private double amount;
-
     private Timestamp timestamp;
 }

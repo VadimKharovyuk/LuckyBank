@@ -1,0 +1,217 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--  <title>Order Payment</title>-->
+<!--  <style>-->
+<!--    body {-->
+<!--      font-family: Arial, sans-serif;-->
+<!--      margin: 20px;-->
+<!--    }-->
+<!--    form {-->
+<!--      max-width: 600px;-->
+<!--      margin: auto;-->
+<!--      padding: 20px;-->
+<!--      border: 1px solid #ccc;-->
+<!--      border-radius: 8px;-->
+<!--    }-->
+<!--    label {-->
+<!--      display: block;-->
+<!--      margin-bottom: 8px;-->
+<!--    }-->
+<!--    input, button {-->
+<!--      width: 100%;-->
+<!--      padding: 10px;-->
+<!--      margin-bottom: 12px;-->
+<!--    }-->
+<!--    button {-->
+<!--      background-color: #28a745;-->
+<!--      color: white;-->
+<!--      border: none;-->
+<!--      cursor: pointer;-->
+<!--    }-->
+<!--    button:hover {-->
+<!--      background-color: #218838;-->
+<!--    }-->
+<!--  </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Order Payment</h1>-->
+<!--<form id="payment-form">-->
+<!--  <label for="totalAmount">Total Amount:</label>-->
+<!--  <input type="number" id="totalAmount" name="totalAmount" step="0.01" required>-->
+
+<!--  <label for="deliveryAddress">Delivery Address:</label>-->
+<!--  <input type="text" id="deliveryAddress" name="deliveryAddress" required>-->
+
+<!--  <label for="orderDate">Order Date:</label>-->
+<!--  <input type="datetime-local" id="orderDate" name="orderDate" required>-->
+
+<!--  <label for="email">Email:</label>-->
+<!--  <input type="email" id="email" name="email" required>-->
+
+<!--  <label for="phoneNumber">Phone Number:</label>-->
+<!--  <input type="tel" id="phoneNumber" name="phoneNumber" required>-->
+
+<!--  <label for="cardId">Card ID:</label>-->
+<!--  <input type="number" id="cardId" name="cardId" required>-->
+
+<!--  <label for="dishId">Dish ID:</label>-->
+<!--  <input type="number" id="dishId" name="dishId" required>-->
+
+<!--  <label for="quantity">Quantity:</label>-->
+<!--  <input type="number" id="quantity" name="quantity" required>-->
+
+<!--  <button type="submit">Pay Now</button>-->
+<!--</form>-->
+
+<!--<script>-->
+<!--  document.getElementById('payment-form').addEventListener('submit', function(event) {-->
+<!--    event.preventDefault(); // Prevent the default form submission-->
+
+<!--    const formData = new FormData(this);-->
+<!--    const data = {-->
+<!--      totalAmount: parseFloat(formData.get('totalAmount')),-->
+<!--      deliveryAddress: formData.get('deliveryAddress'),-->
+<!--      orderDate: formData.get('orderDate'),-->
+<!--      email: formData.get('email'),-->
+<!--      phoneNumber: formData.get('phoneNumber'),-->
+<!--      cardId: parseInt(formData.get('cardId')),-->
+<!--      orderItems: [-->
+<!--        {-->
+<!--          dishId: parseInt(formData.get('dishId')),-->
+<!--          quantity: parseInt(formData.get('quantity'))-->
+<!--        }-->
+<!--      ]-->
+<!--    };-->
+
+<!--    fetch('http://localhost:4040/api/orders', {-->
+<!--      method: 'POST',-->
+<!--      headers: {-->
+<!--        'Content-Type': 'application/json'-->
+<!--      },-->
+<!--      body: JSON.stringify(data)-->
+<!--    })-->
+<!--            .then(response => response.json())-->
+<!--            .then(result => {-->
+<!--              alert('Order placed successfully!');-->
+<!--            })-->
+<!--            .catch(error => {-->
+<!--              console.error('Error:', error);-->
+<!--              alert('Failed to place the order.');-->
+<!--            });-->
+<!--  });-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Payment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    form {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+<h1>Order Payment</h1>
+<form id="payment-form">
+  <label for="totalAmount">Total Amount:</label>
+  <input type="number" id="totalAmount" name="totalAmount" step="0.01" required value="${cart.totalAmount}">
+
+  <label for="deliveryAddress">Delivery Address:</label>
+  <input type="text" id="deliveryAddress" name="deliveryAddress" required>
+
+  <label for="orderDate">Order Date:</label>
+  <input type="datetime-local" id="orderDate" name="orderDate" required>
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required>
+
+  <label for="phoneNumber">Phone Number:</label>
+  <input type="tel" id="phoneNumber" name="phoneNumber" required>
+
+  <label for="cardId">Card ID:</label>
+  <input type="number" id="cardId" name="cardId" required>
+
+  <label for="dishId">Dish ID:</label>
+  <input type="number" id="dishId" name="dishId" required>
+
+  <label for="quantity">Quantity:</label>
+  <input type="number" id="quantity" name="quantity" required>
+
+  <button type="submit">Pay Now</button>
+</form>
+
+<script>
+  document.getElementById('payment-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    const formData = new FormData(this);
+    const data = {
+      totalAmount: parseFloat(formData.get('totalAmount')),
+      deliveryAddress: formData.get('deliveryAddress'),
+      orderDate: formData.get('orderDate'),
+      email: formData.get('email'),
+      phoneNumber: formData.get('phoneNumber'),
+      cardId: parseInt(formData.get('cardId')),
+      orderItems: [
+        {
+          dishId: parseInt(formData.get('dishId')),
+          quantity: parseInt(formData.get('quantity'))
+        }
+      ]
+    };
+
+    // Send data to restaurant server
+    fetch('http://localhost:4040/api/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+            .then(response => response.json())
+            .then(result => {
+              alert('Order placed successfully!');
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              alert('Failed to place the order.');
+            });
+  });
+</script>
+</body>
+</html>

@@ -19,7 +19,12 @@ public class BankController {
     }
     @GetMapping("/exchange")
     public String exchange(){
-        return "Currency";
+        return "api/Currency";
     }
+    @GetMapping("/pay")
+    public String pay(){
+        return "api/pay";
+    }
+
 
 }

@@ -77,4 +77,8 @@ public class TransferService {
             return transferRepository.findBySenderCard_CardNumberOrRecipientCard_CardNumber(cardNumber, cardNumber);
         }
     }
+
+    public void saveTransfer(Transfer transfer) {
+        transferRepository.save(transfer);
+    }
 }
