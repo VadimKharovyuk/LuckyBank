@@ -5,54 +5,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Currency Rates</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .dropdown-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .dropdown-container select {
+            padding: 8px 12px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        .dropdown-container button {
+            padding: 8px 16px;
+            font-size: 14px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .dropdown-container button:hover {
+            background-color: #0056b3;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
+
         th, td {
-            border: 1px solid black;
-            padding: 8px;
+            padding: 12px 16px;
             text-align: left;
+            border-bottom: 1px solid #ddd;
         }
-        .dropdown-container {
-            margin-bottom: 20px;
+
+        th {
+            background-color: #f2f2f2;
         }
-        .dropdown-container select {
-            padding: 5px;
-            margin-right: 10px;
-        }
-        .dropdown-container button {
-            padding: 5px 10px;
+
+        tr:hover {
+            background-color: #f5f5f5;
         }
     </style>
 </head>
 <body>
-<h1>Currency Rates</h1>
-<div class="dropdown-container">
-    <label for="show-all-select">Show Currencies:</label>
-    <select id="show-all-select">
-        <option value="all">All</option>
-        <option value="UAH">Украинская гривна</option>
-        <option value="TRY">Турецкая лира</option>
-        <option value="RUB">Русский рубль</option>
-        <option value="CNY">Китайский юань</option>
-        <option value="PLN">Польский злотый</option>
-        <option value="AED">АОЕ дирхам</option>
-        <!-- Add other currencies as needed -->
-    </select>
-    <button id="show-all-btn">Show Selected Currencies</button>
+<div class="container">
+    <h1>Currency Rates</h1>
+    <div class="dropdown-container">
+        <select id="show-all-select">
+            <option value="all">Show All Currencies</option>
+            <option value="UAH">Украинская гривна</option>
+            <option value="TRY">Турецкая лира</option>
+            <option value="RUB">Русский рубль</option>
+            <option value="CNY">Китайский юань</option>
+            <option value="PLN">Польский злотый</option>
+            <option value="AED">АОЕ дирхам</option>
+        </select>
+        <button id="show-all-btn">Show Rates</button>
+    </div>
+    <table id="currency-table">
+        <thead>
+        <tr>
+            <th>Currency</th>
+            <th>Rate</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 </div>
-<table id="currency-table">
-    <thead>
-    <tr>
-        <th>Currency</th>
-        <th>Rate</th>
-    </tr>
-    </thead>
-    <tbody>
-
-    </tbody>
-</table>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const showAllButton = document.querySelector('#show-all-btn');
