@@ -22,7 +22,7 @@ public class WelcomeEmailListener {
     @RabbitListener(queues = "welcomeQueue")
     public void receiveWelcomeMessage1(Client client) {
         System.out.println("Очередь 2 welcomeQueue " +client.getEmail());
-        emailService.sendWelcomeEmail(client);
+//        emailService.sendWelcomeEmail(client);
 
     }
 }

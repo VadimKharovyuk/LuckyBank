@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('/Default_weather_site_europe_0.jpg');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        select, input[type="text"], button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        select {
+            background-color: #fff;
+            color: #333;
+        }
+
+        input[type="text"] {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        button {
+            background-color: #007BFF; /* Bootstrap primary color */
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+
+        pre {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+            white-space: pre-wrap; /* Allows wrapping in preformatted text */
+        }
+    </style>
+    <script>
+        function fetchWeather() {
+            const citySelect = document.getElementById('city-select');
+            const cityInput = document.getElementById('city-input');
+
+            let city = cityInput.value.trim();
+
+            if (city === '') {
+                city = citySelect.value;
+            }
+
+            fetch(`/weather-data?city=${city}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('weather').innerText =
+                        `Город: ${data.name}\n` +
+                        `Температура: ${data.main.temp}°C\n` +
+                        `Описание: ${data.weather[0].description}`;
+                })
+                .catch(error => {
+                    console.error('Error fetching weather:', error);
+                    document.getElementById('weather').innerText = 'Error fetching weather data';
+                });
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <h1>Информация о погоде</h1>
+
+    <select id="city-select">
+        <option value="Kyiv">Киев</option>
+        <option value="Kharkiv">Харьков</option>
+        <option value="Odesa">Одесса</option>
+        <option value="Dnipro">Днипро</option>
+        <option value="Lviv">Львов</option>
+        <option value="Donetsk">Донецк</option>
+        <option value="Zaporizhzhia">Запорожье</option>
+        <option value="Mykolaiv">Николаев</option>
+        <option value="Vinnytsia">Виница</option>
+        <option value="Chernihiv">Чернигов</option>
+        <option value="Prague">Прага</option>
+    </select>
+
+    <input type="text" id="city-input" placeholder="Другой город" />
+
+    <button onclick="fetchWeather()">Посмотреть погоду</button>
+    <pre id="weather"></pre>
+</div>
+</body>
+</html>

@@ -64,5 +64,8 @@ public void sendMassEmail(String subject, String text, List<Client> clients) {
 
 
 
+
+
+
 }
 
