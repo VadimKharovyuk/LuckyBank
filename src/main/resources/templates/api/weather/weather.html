@@ -20,13 +20,15 @@
         }
 
         .container {
+         margin-top: 80px;
             background-color: rgba(0, 0, 0, 0.7);
             padding: 40px;
             border-radius: 15px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            max-width: 400px;
+            max-width: 500px;
             width: 100%;
             text-align: center;
+            overflow: auto;
         }
 
         h1 {
@@ -58,7 +60,6 @@
         input[type="text"] {
             background-color: #f0f0f0;
             color: #333;
-            width: 370px;
         }
 
         button {
@@ -79,6 +80,8 @@
             white-space: pre-wrap;
             text-align: left;
             font-size: 1em;
+            max-height: 400px; /* Ограничиваем высоту блока с данными */
+            overflow-y: auto; /* Добавляем вертикальную прокрутку, если данных много */
         }
 
         @media (max-width: 600px) {
@@ -121,6 +124,34 @@
                 });
         }
 
+        function fetchForecast() {
+            const citySelect = document.getElementById('city-select');
+            const cityInput = document.getElementById('city-input');
+
+            let city = cityInput.value.trim();
+
+            if (city === '') {
+                city = citySelect.value;
+            }
+
+            fetch(`/forecast-data?city=${city}`)
+                .then(response => response.json())
+                .then(data => {
+                    let forecastText = `Forecast for ${data.city.name}:\n\n`;
+                    data.list.forEach(entry => {
+                        const date = new Date(entry.dt * 1000);
+                        forecastText += `${date.toLocaleString()}\n` +
+                            `Temperature: ${entry.main.temp}°C\n` +
+                            `Description: ${entry.weather[0].description}\n\n`;
+                    });
+                    document.getElementById('forecast').innerText = forecastText;
+                })
+                .catch(error => {
+                    console.error('Error fetching forecast:', error);
+                    document.getElementById('forecast').innerText = 'Error fetching forecast data';
+                });
+        }
+
         function fetchWeatherByGeolocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(position => {
@@ -129,9 +160,9 @@
                         .then(response => response.json())
                         .then(data => {
                             document.getElementById('weather').innerText =
-                                `Город: ${data.name}\n` +
-                                `Температура: ${data.main.temp}°C\n` +
-                                `Описание: ${data.weather[0].description}`;
+                                `City: ${data.name}\n` +
+                                `Temperature: ${data.main.temp}°C\n` +
+                                `Description: ${data.weather[0].description}`;
                         })
                         .catch(error => {
                             console.error('Error fetching weather:', error);
@@ -163,12 +194,15 @@
         <option value="Chernihiv">Chernihiv</option>
     </select>
 
-    <input type="text" id="city-input" placeholder="Другой город" />
+    <input type="text" id="city-input" placeholder="Or enter another city" />
 
-    <button onclick="fetchWeather()">Узнать</button>
-    <button onclick="fetchWeatherByGeolocation()">Получить погоду по геолокации</button>
+    <button onclick="fetchWeather()">Получить</button>
+    <button onclick="fetchForecast()">Получить на 5 дней </button>
+    <button onclick="fetchWeatherByGeolocation()">Получить по местонахождения </button>
 
     <pre id="weather"></pre>
+    <pre id="forecast"></pre>
 </div>
 </body>
 </html>
+
