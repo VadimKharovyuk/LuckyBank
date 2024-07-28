@@ -30,8 +30,11 @@
 //        }
 //    }
 //}
-package com.example.luckybank.WeatherApi;
+package com.example.luckybank.WeatherApi.controller;
 
+import com.example.luckybank.WeatherApi.ForecastResponse;
+import com.example.luckybank.WeatherApi.WeatherResponse;
+import com.example.luckybank.WeatherApi.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

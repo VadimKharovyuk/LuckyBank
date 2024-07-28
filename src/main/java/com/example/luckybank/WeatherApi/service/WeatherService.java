@@ -20,8 +20,10 @@
 //        return restTemplate.getForObject(url, WeatherResponse.class);
 //    }
 //}
-package com.example.luckybank.WeatherApi;
+package com.example.luckybank.WeatherApi.service;
 
+import com.example.luckybank.WeatherApi.ForecastResponse;
+import com.example.luckybank.WeatherApi.WeatherResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 

@@ -179,8 +179,9 @@
 </head>
 <body>
 <div class="container">
+    <div id="openweathermap-widget-15"></div>
+    <script>window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];  window.myWidgetParam.push({id: 15,cityid: '323776',appid: '7edb7af099975cd810018d918a347f18',units: 'metric',containerid: 'openweathermap-widget-15',  });  (function() {var script = document.createElement('script');script.async = true;script.charset = "utf-8";script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(script, s);  })();</script>
     <h1>Информация о погоде</h1>
-
     <select id="city-select">
         <option value="Kyiv">Kyiv</option>
         <option value="Kharkiv">Kharkiv</option>
@@ -194,7 +195,7 @@
         <option value="Chernihiv">Chernihiv</option>
     </select>
 
-    <input type="text" id="city-input" placeholder="Or enter another city" />
+    <input type="text" id="city-input" placeholder="Введите город" />
 
     <button onclick="fetchWeather()">Получить</button>
     <button onclick="fetchForecast()">Получить на 5 дней </button>
@@ -202,6 +203,7 @@
 
     <pre id="weather"></pre>
     <pre id="forecast"></pre>
+
 </div>
 </body>
 </html>
