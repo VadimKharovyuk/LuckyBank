@@ -20,6 +20,6 @@ public class BalanceController {
     public String getTotalBalance(Model model) {
         double totalBalance = balanceCalculationService.calculateTotalBalance();
         model.addAttribute("totalBalance", totalBalance);
-        return "total_balance"; // Имя представления
+        return "total_balance";
     }
 }

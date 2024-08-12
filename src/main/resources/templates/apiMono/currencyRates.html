@@ -1,0 +1,423 @@
+<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
+<!--&lt;!&ndash;<html xmlns:th="http://www.thymeleaf.org">&ndash;&gt;-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta charset="UTF-8">&ndash;&gt;-->
+<!--&lt;!&ndash;    <title>Currency Rates</title>&ndash;&gt;-->
+<!--&lt;!&ndash;    <style>&ndash;&gt;-->
+<!--&lt;!&ndash;        body {&ndash;&gt;-->
+<!--&lt;!&ndash;            font-family: Arial, sans-serif;&ndash;&gt;-->
+<!--&lt;!&ndash;            margin: 20px;&ndash;&gt;-->
+<!--&lt;!&ndash;            padding: 0;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+
+<!--&lt;!&ndash;        h1 {&ndash;&gt;-->
+<!--&lt;!&ndash;            text-align: center;&ndash;&gt;-->
+<!--&lt;!&ndash;            margin-bottom: 20px;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+
+<!--&lt;!&ndash;        #searchInput {&ndash;&gt;-->
+<!--&lt;!&ndash;            margin-bottom: 20px;&ndash;&gt;-->
+<!--&lt;!&ndash;            padding: 8px;&ndash;&gt;-->
+<!--&lt;!&ndash;            font-size: 16px;&ndash;&gt;-->
+<!--&lt;!&ndash;            width: 100%;&ndash;&gt;-->
+<!--&lt;!&ndash;            max-width: 600px;&ndash;&gt;-->
+<!--&lt;!&ndash;            display: block;&ndash;&gt;-->
+<!--&lt;!&ndash;            margin-left: auto;&ndash;&gt;-->
+<!--&lt;!&ndash;            margin-right: auto;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+
+<!--&lt;!&ndash;        table {&ndash;&gt;-->
+<!--&lt;!&ndash;            width: 100%;&ndash;&gt;-->
+<!--&lt;!&ndash;            border-collapse: collapse;&ndash;&gt;-->
+<!--&lt;!&ndash;            margin-top: 20px;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+
+<!--&lt;!&ndash;        th, td {&ndash;&gt;-->
+<!--&lt;!&ndash;            padding: 12px;&ndash;&gt;-->
+<!--&lt;!&ndash;            text-align: left;&ndash;&gt;-->
+<!--&lt;!&ndash;            border: 1px solid #ddd;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+
+<!--&lt;!&ndash;        th {&ndash;&gt;-->
+<!--&lt;!&ndash;            background-color: #f4f4f4;&ndash;&gt;-->
+<!--&lt;!&ndash;            cursor: pointer;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+
+<!--&lt;!&ndash;        th.asc::after {&ndash;&gt;-->
+<!--&lt;!&ndash;            content: '▲';&ndash;&gt;-->
+<!--&lt;!&ndash;            margin-left: 5px;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+
+<!--&lt;!&ndash;        th.desc::after {&ndash;&gt;-->
+<!--&lt;!&ndash;            content: '▼';&ndash;&gt;-->
+<!--&lt;!&ndash;            margin-left: 5px;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+
+<!--&lt;!&ndash;        tbody tr:nth-child(even) {&ndash;&gt;-->
+<!--&lt;!&ndash;            background-color: #f9f9f9;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+
+<!--&lt;!&ndash;        tbody tr:hover {&ndash;&gt;-->
+<!--&lt;!&ndash;            background-color: #f1f1f1;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+<!--&lt;!&ndash;    </style>&ndash;&gt;-->
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+<!--&lt;!&ndash;<h1>Currency Rates</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;<input type="text" id="searchInput" placeholder="Search...">&ndash;&gt;-->
+<!--&lt;!&ndash;<table>&ndash;&gt;-->
+<!--&lt;!&ndash;    <thead>&ndash;&gt;-->
+<!--&lt;!&ndash;    <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;        <th id="currencyCodeA">Currency A</th>&ndash;&gt;-->
+<!--&lt;!&ndash;        <th id="currencyCodeB">Currency B</th>&ndash;&gt;-->
+<!--&lt;!&ndash;        <th id="date">Date</th>&ndash;&gt;-->
+<!--&lt;!&ndash;        <th id="rateSell">Rate Sell</th>&ndash;&gt;-->
+<!--&lt;!&ndash;        <th id="rateBuy">Rate Buy</th>&ndash;&gt;-->
+<!--&lt;!&ndash;        <th id="rateCross">Rate Cross</th>&ndash;&gt;-->
+<!--&lt;!&ndash;    </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;    </thead>&ndash;&gt;-->
+<!--&lt;!&ndash;    <tbody>&ndash;&gt;-->
+<!--&lt;!&ndash;    <tr th:each="rate : ${rates}">&ndash;&gt;-->
+<!--&lt;!&ndash;        <td th:text="${rate.currencyNameA}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;        <td th:text="${rate.currencyNameB}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;        <td th:text="${#dates.format(rate.date * 1000, 'yyyy-MM-dd HH:mm:ss')}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;        <td th:text="${rate.rateSell}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;        <td th:text="${rate.rateBuy}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;        <td th:text="${rate.rateCross}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;    </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;    </tbody>&ndash;&gt;-->
+<!--&lt;!&ndash;</table>&ndash;&gt;-->
+<!--&lt;!&ndash;<script>&ndash;&gt;-->
+<!--&lt;!&ndash;    document.addEventListener("DOMContentLoaded", function() {&ndash;&gt;-->
+<!--&lt;!&ndash;        console.log("Document loaded and ready.");&ndash;&gt;-->
+
+<!--&lt;!&ndash;        function sortTable(columnIndex, asc = true) {&ndash;&gt;-->
+<!--&lt;!&ndash;            const table = document.querySelector('table');&ndash;&gt;-->
+<!--&lt;!&ndash;            const tbody = table.querySelector('tbody');&ndash;&gt;-->
+<!--&lt;!&ndash;            const rows = Array.from(tbody.querySelectorAll('tr'));&ndash;&gt;-->
+
+<!--&lt;!&ndash;            rows.sort((a, b) => {&ndash;&gt;-->
+<!--&lt;!&ndash;                const cellA = a.children[columnIndex].innerText;&ndash;&gt;-->
+<!--&lt;!&ndash;                const cellB = b.children[columnIndex].innerText;&ndash;&gt;-->
+
+<!--&lt;!&ndash;                return asc ? cellA.localeCompare(cellB, undefined, { numeric: true }) : cellB.localeCompare(cellA, undefined, { numeric: true });&ndash;&gt;-->
+<!--&lt;!&ndash;            });&ndash;&gt;-->
+
+<!--&lt;!&ndash;            rows.forEach(row => tbody.appendChild(row));&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+
+<!--&lt;!&ndash;        document.querySelectorAll('th').forEach((header, index) => {&ndash;&gt;-->
+<!--&lt;!&ndash;            header.addEventListener('click', () => {&ndash;&gt;-->
+<!--&lt;!&ndash;                const currentIsAscending = header.classList.contains('asc');&ndash;&gt;-->
+<!--&lt;!&ndash;                document.querySelectorAll('th').forEach(th => th.classList.remove('asc', 'desc'));&ndash;&gt;-->
+<!--&lt;!&ndash;                header.classList.add(currentIsAscending ? 'desc' : 'asc');&ndash;&gt;-->
+<!--&lt;!&ndash;                sortTable(index, currentIsAscending);&ndash;&gt;-->
+<!--&lt;!&ndash;            });&ndash;&gt;-->
+<!--&lt;!&ndash;        });&ndash;&gt;-->
+
+<!--&lt;!&ndash;        const searchInput = document.getElementById('searchInput');&ndash;&gt;-->
+<!--&lt;!&ndash;        searchInput.addEventListener('input', function() {&ndash;&gt;-->
+<!--&lt;!&ndash;            const searchTerm = this.value.toLowerCase();&ndash;&gt;-->
+<!--&lt;!&ndash;            const rows = document.querySelectorAll('tbody tr');&ndash;&gt;-->
+
+<!--&lt;!&ndash;            rows.forEach(row => {&ndash;&gt;-->
+<!--&lt;!&ndash;                const cells = row.getElementsByTagName('td');&ndash;&gt;-->
+<!--&lt;!&ndash;                let rowVisible = false;&ndash;&gt;-->
+
+<!--&lt;!&ndash;                for (let cell of cells) {&ndash;&gt;-->
+<!--&lt;!&ndash;                    if (cell.innerText.toLowerCase().includes(searchTerm)) {&ndash;&gt;-->
+<!--&lt;!&ndash;                        rowVisible = true;&ndash;&gt;-->
+<!--&lt;!&ndash;                        break;&ndash;&gt;-->
+<!--&lt;!&ndash;                    }&ndash;&gt;-->
+<!--&lt;!&ndash;                }&ndash;&gt;-->
+
+<!--&lt;!&ndash;                row.style.display = rowVisible ? '' : 'none';&ndash;&gt;-->
+<!--&lt;!&ndash;            });&ndash;&gt;-->
+<!--&lt;!&ndash;        });&ndash;&gt;-->
+<!--&lt;!&ndash;    });&ndash;&gt;-->
+<!--&lt;!&ndash;</script>&ndash;&gt;-->
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+<!--&lt;!&ndash;</html>&ndash;&gt;-->
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Currency Rates</title>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            margin: 20px;-->
+<!--            padding: 0;-->
+<!--        }-->
+
+<!--        h1 {-->
+<!--            text-align: center;-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+
+<!--        #searchInput {-->
+<!--            margin-bottom: 20px;-->
+<!--            padding: 8px;-->
+<!--            font-size: 16px;-->
+<!--            width: 100%;-->
+<!--            max-width: 600px;-->
+<!--            display: block;-->
+<!--            margin-left: auto;-->
+<!--            margin-right: auto;-->
+<!--        }-->
+
+<!--        table {-->
+<!--            width: 100%;-->
+<!--            border-collapse: collapse;-->
+<!--            margin-top: 20px;-->
+<!--        }-->
+
+<!--        th, td {-->
+<!--            padding: 12px;-->
+<!--            text-align: left;-->
+<!--            border: 1px solid #ddd;-->
+<!--        }-->
+
+<!--        th {-->
+<!--            background-color: #f4f4f4;-->
+<!--            cursor: pointer;-->
+<!--        }-->
+
+<!--        th.asc::after {-->
+<!--            content: '▲';-->
+<!--            margin-left: 5px;-->
+<!--        }-->
+
+<!--        th.desc::after {-->
+<!--            content: '▼';-->
+<!--            margin-left: 5px;-->
+<!--        }-->
+
+<!--        tbody tr:nth-child(even) {-->
+<!--            background-color: #f9f9f9;-->
+<!--        }-->
+
+<!--        tbody tr:hover {-->
+<!--            background-color: #f1f1f1;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Currency Rates</h1>-->
+<!--<input type="text" id="searchInput" placeholder="Search...">-->
+<!--<table>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th id="currencyCodeA">Currency A</th>-->
+<!--        <th id="currencyCodeB">Currency B</th>-->
+<!--        <th id="date">Date</th>-->
+<!--        <th id="rateSell">Rate Sell</th>-->
+<!--        <th id="rateBuy">Rate Buy</th>-->
+<!--        <th id="rateCross">Rate Cross</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr th:each="rate : ${rates}" th:if="${#lists.contains(allowedCurrencyCodes, rate.currencyCodeA) and #lists.contains(allowedCurrencyCodes, rate.currencyCodeB)}">-->
+<!--        <td th:text="${rate.currencyNameA}"></td>-->
+<!--        <td th:text="${rate.currencyNameB}"></td>-->
+<!--        <td th:text="${#dates.format(rate.date * 1000, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
+<!--        <td th:text="${rate.rateSell}"></td>-->
+<!--        <td th:text="${rate.rateBuy}"></td>-->
+<!--        <td th:text="${rate.rateCross}"></td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+<!--<script>-->
+<!--    document.addEventListener("DOMContentLoaded", function() {-->
+<!--        console.log("Document loaded and ready.");-->
+
+<!--        function sortTable(columnIndex, asc = true) {-->
+<!--            const table = document.querySelector('table');-->
+<!--            const tbody = table.querySelector('tbody');-->
+<!--            const rows = Array.from(tbody.querySelectorAll('tr'));-->
+
+<!--            rows.sort((a, b) => {-->
+<!--                const cellA = a.children[columnIndex].innerText;-->
+<!--                const cellB = b.children[columnIndex].innerText;-->
+
+<!--                return asc ? cellA.localeCompare(cellB, undefined, { numeric: true }) : cellB.localeCompare(cellA, undefined, { numeric: true });-->
+<!--            });-->
+
+<!--            rows.forEach(row => tbody.appendChild(row));-->
+<!--        }-->
+
+<!--        document.querySelectorAll('th').forEach((header, index) => {-->
+<!--            header.addEventListener('click', () => {-->
+<!--                const currentIsAscending = header.classList.contains('asc');-->
+<!--                document.querySelectorAll('th').forEach(th => th.classList.remove('asc', 'desc'));-->
+<!--                header.classList.add(currentIsAscending ? 'desc' : 'asc');-->
+<!--                sortTable(index, currentIsAscending);-->
+<!--            });-->
+<!--        });-->
+
+<!--        const searchInput = document.getElementById('searchInput');-->
+<!--        searchInput.addEventListener('input', function() {-->
+<!--            const searchTerm = this.value.toLowerCase();-->
+<!--            const rows = document.querySelectorAll('tbody tr');-->
+
+<!--            rows.forEach(row => {-->
+<!--                const cells = row.getElementsByTagName('td');-->
+<!--                let rowVisible = false;-->
+
+<!--                for (let cell of cells) {-->
+<!--                    if (cell.innerText.toLowerCase().includes(searchTerm)) {-->
+<!--                        rowVisible = true;-->
+<!--                        break;-->
+<!--                    }-->
+<!--                }-->
+
+<!--                row.style.display = rowVisible ? '' : 'none';-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Currency Rates</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #searchInput {
+            margin-bottom: 20px;
+            padding: 8px;
+            font-size: 16px;
+            width: 100%;
+            max-width: 600px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            cursor: pointer;
+        }
+
+        th.asc::after {
+            content: '▲';
+            margin-left: 5px;
+        }
+
+        th.desc::after {
+            content: '▼';
+            margin-left: 5px;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+<h1>Currency Rates</h1>
+<input type="text" id="searchInput" placeholder="Search...">
+<table>
+    <thead>
+    <tr>
+        <th id="currencyCodeA">Currency A</th>
+        <th id="currencyCodeB">Currency B</th>
+        <th id="date">Date</th>
+        <th id="rateSell">Rate Sell</th>
+        <th id="rateBuy">Rate Buy</th>
+        <th id="rateCross">Rate Cross</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="rate : ${rates}">
+        <td th:text="${rate.currencyCodeA}"></td>
+        <td th:text="${rate.currencyCodeB}"></td>
+        <td th:text="${#dates.format(rate.date * 1000, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${rate.rateSell}"></td>
+        <td th:text="${rate.rateBuy}"></td>
+        <td th:text="${rate.rateCross}"></td>
+    </tr>
+    </tbody>
+</table>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        console.log("Document loaded and ready.");
+
+        function sortTable(columnIndex, asc = true) {
+            const table = document.querySelector('table');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+
+            rows.sort((a, b) => {
+                const cellA = a.children[columnIndex].innerText;
+                const cellB = b.children[columnIndex].innerText;
+
+                return asc ? cellA.localeCompare(cellB, undefined, { numeric: true }) : cellB.localeCompare(cellA, undefined, { numeric: true });
+            });
+
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        document.querySelectorAll('th').forEach((header, index) => {
+            header.addEventListener('click', () => {
+                const currentIsAscending = header.classList.contains('asc');
+                document.querySelectorAll('th').forEach(th => th.classList.remove('asc', 'desc'));
+                header.classList.add(currentIsAscending ? 'desc' : 'asc');
+                sortTable(index, currentIsAscending);
+            });
+        });
+
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const rows = document.querySelectorAll('tbody tr');
+
+            rows.forEach(row => {
+                const cells = row.getElementsByTagName('td');
+                let rowVisible = false;
+
+                for (let cell of cells) {
+                    if (cell.innerText.toLowerCase().includes(searchTerm)) {
+                        rowVisible = true;
+                        break;
+                    }
+                }
+
+                row.style.display = rowVisible ? '' : 'none';
+            });
+        });
+    });
+</script>
+</body>
+</html>
+
