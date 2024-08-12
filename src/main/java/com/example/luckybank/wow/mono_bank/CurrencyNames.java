@@ -11,7 +11,6 @@ public class CurrencyNames {
         CURRENCY_NAMES.put(840, "USD - US Dollar");
         CURRENCY_NAMES.put(978, "EUR - Euro");
         CURRENCY_NAMES.put(980, "UAH - Ukrainian Hryvnia");
-        // Добавляем другие валюты по мере необходимости
         CURRENCY_NAMES.put(978, "EUR - Euro");  // Например, добавлена еще одна валюта
         CURRENCY_NAMES.put(643, "RUB - Russian Ruble");  // Пример новой валюты
         CURRENCY_NAMES.put(826, "GBP - British Pound");  // Пример новой валюты

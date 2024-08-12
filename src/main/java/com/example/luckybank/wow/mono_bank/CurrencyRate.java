@@ -30,10 +30,13 @@ public class CurrencyRate {
     @JsonProperty("rateCross")
     private float rateCross;
 
-    @JsonProperty("currencyNameA")
-    private String currencyNameA;  // Add this field
+    // Метод для получения имени валюты A
+    public String getCurrencyNameA() {
+        return CurrencyNames.getCurrencyName(currencyCodeA);
+    }
 
-    @JsonProperty("currencyNameB")
-    private String currencyNameB;
-
+    // Метод для получения имени валюты B
+    public String getCurrencyNameB() {
+        return CurrencyNames.getCurrencyName(currencyCodeB);
+    }
 }
