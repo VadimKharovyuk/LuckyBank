@@ -1,8 +1,10 @@
 package com.example.luckybank.api;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.IOException;
+import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+@Service
 public class CurrencyService {
     private final CurrencyApiClient apiClient = new CurrencyApiClient();
     private final ObjectMapper objectMapper = new ObjectMapper();

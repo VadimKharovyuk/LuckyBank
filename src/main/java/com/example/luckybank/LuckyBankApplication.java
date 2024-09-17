@@ -9,6 +9,8 @@ import org.springframework.cache.annotation.EnableCaching;
 @EnableCaching
 public class LuckyBankApplication {
 
+
+
     public static void main(String[] args) {
         SpringApplication.run(LuckyBankApplication.class, args);
 
